@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("com.gradleup.shadow") version "9.3.1"
     id("net.cytonic.run-cytosis") version "1.0"
+    id("net.kyori.blossom") version "2.2.0"
 }
 
 version = project.findProperty("plugin_version") as String? ?: "unknown"
@@ -22,7 +23,6 @@ dependencies {
         classifier("all")
     }) {
         exclude("me.devnatan")
-
     }
 
     compileOnly(libs.lamp.minestom)
@@ -42,92 +42,32 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
-val generateClassloader: TaskProvider<Task> = tasks.register("generateClassloader") {
-    val outputDir: File = file("$projectDir/build/generated/sources/classloader")
-    val packageDir = File(outputDir, "me/webhead1104/towncraft")
-    val classloaderFile = File(packageDir, "Main.java")
+sourceSets {
+    main {
+        blossom {
+            javaSources {
+                val deps = provider {
+                    val commonDeps = project(":platforms:common")
+                        .configurations.getByName("api")
+                        .dependencies
+                        .filterIsInstance<ModuleDependency>()
+                        .filter { it.group != "org.spongepowered" }
 
-    val deps = provider {
-        val commonDeps = project(":platforms:common")
-            .configurations.getByName("api")
-            .dependencies
-            .filterIsInstance<ModuleDependency>()
-            .filter { it.group != "org.spongepowered" }
+                    val platformDeps = configurations.getByName("compileOnly")
+                        .dependencies
+                        .filterIsInstance<ModuleDependency>()
+                        .filter { it.group != "net.cytonic" && it.group != "me.webhead1104" }
 
-        val platformDeps = configurations.getByName("compileOnly")
-            .dependencies
-            .filterIsInstance<ModuleDependency>()
-            .filter { it.group != "net.cytonic" && it.group != "me.webhead1104" }
+                    (commonDeps + platformDeps).map { "${it.group}:${it.name}:${it.version}" }
+                }
 
-        (commonDeps + platformDeps).map { "${it.group}:${it.name}:${it.version}" }
+                val depsString: String = deps.get().joinToString(separator = "\n        ") {
+                    """manager.dependency("${it.replace(".", "$")}".replace("$", "."));"""
+                }.trimMargin()
+                properties.put("depString", depsString)
+            }
+        }
     }
-
-    inputs.property("dependencies", deps)
-    outputs.file(classloaderFile)
-
-    doLast {
-        packageDir.mkdirs()
-        outputDir.mkdirs()
-        classloaderFile.createNewFile()
-
-        val depsString: String = deps.get().joinToString("\n") {
-            """
-                dependencyManager.dependency("${it.replace(".", "$")}".replace("$", "."));
-            """
-        }.trimIndent()
-
-        classloaderFile.writeText(
-            """
-package me.webhead1104.towncraft;
-
-import net.cytonic.cytosis.plugins.CytosisPlugin;
-import revxrsal.zapper.DependencyManager;
-import revxrsal.zapper.classloader.URLClassLoaderWrapper;
-import revxrsal.zapper.repository.Repository;
-
-import java.io.File;
-import java.net.URLClassLoader;
-
-public class Main implements CytosisPlugin {
-    static {
-        File libraries = new File(
-                Towncraft.getDataFolder(),
-                "libraries"
-        );
-        DependencyManager dependencyManager = new DependencyManager(
-                libraries,
-                URLClassLoaderWrapper.wrap((URLClassLoader) Main.class.getClassLoader())
-        );
-
-        dependencyManager.repository(Repository.mavenCentral());
-        dependencyManager.repository(Repository.maven("https://jitpack.io"));
-        dependencyManager.repository(Repository.maven("https://repo.opencollab.dev/maven-snapshots"));
-
-        $depsString
-
-        dependencyManager.load();
-    }
-
-    @Override
-    public void initialize() {
-        TowncraftCytosis.initialize();
-    }
-
-    @Override
-    public void shutdown() {
-        TowncraftCytosis.shutdown();
-    }
-}
-            """.trimIndent()
-        )
-
-        println("Generated Main.java at $classloaderFile")
-    }
-}
-
-tasks.compileJava {
-    dependsOn(generateClassloader)
-    source(generateClassloader.map { layout.buildDirectory.dir("generated/sources/classloader").get() })
 }
 
 tasks {
