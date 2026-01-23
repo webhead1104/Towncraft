@@ -68,7 +68,7 @@ public class PlotMenu extends TowncraftView {
         User user = userState.get(context);
         World world = user.getWorld();
 
-        world.getSection(user.getSection()).getSlotMap().forEach((slot, mapTile) -> {
+        world.getSection(user.getSection()).getSlotMap().forEach((slot, _) -> {
             if (!slot.equals(slotState.get(context))) {
                 context.slot(slot).updateOnClick().onUpdate(slotContext -> {
                     WorldSection section = worldSectionState.get(slotContext);

@@ -44,7 +44,8 @@ import org.jetbrains.annotations.NotNull;
 public class BuildMenuSelectBuildingMenu extends TowncraftView {
     private final State<Key> keyState = initialState();
     private final State<BuildMenuType.BuildMenu> typeState = computedState(context -> Towncraft.getDataLoader(BuildMenuType.class).get(keyState.get(context)));
-    private final State<Pagination> paginationState = buildComputedPaginationState(context -> typeState.get(context).getBuildings()).elementFactory((context, builder, index, buildingType) -> {
+    private final State<Pagination> paginationState = buildComputedPaginationState(context ->
+            typeState.get(context).getBuildings()).elementFactory((context, builder, _, buildingType) -> {
         BuildingType.Building building = context.getUser().getPurchasedBuildings().getNextBuilding(buildingType);
         if (building == null) {
             TowncraftItemStack itemStack = TowncraftItemStack.of(TowncraftMaterial.BARRIER);

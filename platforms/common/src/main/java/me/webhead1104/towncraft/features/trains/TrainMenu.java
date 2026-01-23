@@ -135,7 +135,7 @@ public class TrainMenu extends TowncraftView {
                         trainCar.setClaimItemType(Towncraft.NONE_KEY);
                         trainCar.setClaimItemAmount(0);
                         AtomicBoolean good = new AtomicBoolean(true);
-                        train.getTrainCars().forEach((key, value) -> {
+                        train.getTrainCars().forEach((_, value) -> {
                             if (!value.getClaimItemType().equals(Towncraft.NONE_KEY) && value.getClaimItemAmount() != 0)
                                 good.set(false);
                         });
@@ -155,7 +155,7 @@ public class TrainMenu extends TowncraftView {
                             trainCar.setGiveItemAmount(0);
                             trainCar.setGiveItemType(Towncraft.NONE_KEY);
                             AtomicBoolean good = new AtomicBoolean(true);
-                            train.getTrainCars().forEach((key, value) -> {
+                            train.getTrainCars().forEach((_, value) -> {
                                 if (!value.getGiveItemType().equals(Towncraft.NONE_KEY) && value.getGiveItemAmount() != 0)
                                     good.set(false);
                             });

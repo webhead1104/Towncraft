@@ -74,7 +74,7 @@ public class FactoryMenu extends TowncraftView {
                 TowncraftItemStack stack = recipe.getResult().getItemStack();
                 stack.setLore(calculateLore(recipe, user.getBarn()));
                 slotRenderContext.setItem(stack);
-            }).updateOnClick().onClick(slotClickContext -> {
+            }).updateOnClick().onClick(_ -> {
                 if (!factory.canAddWaitingOrWorkingOn() || !recipe.hasRequiredItems(user.getBarn())) return;
                 recipe.getIngredients().forEach((item, value) -> user.getBarn().removeAmountFromItem(item.key(), value));
                 if (factory.canSetWorkingOn()) {
@@ -151,7 +151,7 @@ public class FactoryMenu extends TowncraftView {
                 TowncraftItemStack stack = recipe.getResult().getItemStack();
                 stack.setLore(Msg.format("<green>Click to claim!"));
                 slotRenderContext.setItem(stack);
-            }).onClick(slotClickContext -> {
+            }).onClick(_ -> {
                 if (factory.getCompleted(finalI).equals(Towncraft.NONE_KEY)) return;
                 user.getBarn().addAmountToItem(factory.getCompleted(finalI).key(), 1);
                 user.addXp(factory.getCompleted(finalI).getXpGiven());

@@ -135,7 +135,7 @@ public class User {
     public void recalculatePopulation() {
         AtomicInteger population = new AtomicInteger(60);
         AtomicInteger maxPopulation = new AtomicInteger(60);
-        purchasedBuildings.getPurchasedBuildings().forEach((buildingType, list) ->
+        purchasedBuildings.getPurchasedBuildings().forEach((_, list) ->
                 list.stream().filter(PurchasedBuildings.PurchasedBuilding::isPlaced).forEach(value -> {
                     BuildingType.Building building = value.getBuilding();
                     population.addAndGet(building.getPopulationIncrease());

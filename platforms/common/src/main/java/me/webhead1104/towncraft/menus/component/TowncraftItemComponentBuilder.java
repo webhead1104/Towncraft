@@ -203,7 +203,7 @@ public final class TowncraftItemComponentBuilder extends DefaultComponentBuilder
      * @return This item builder.
      */
     public TowncraftItemComponentBuilder onClick(@Nullable Runnable clickHandler) {
-        return onClick(clickHandler == null ? null : $ -> clickHandler.run());
+        return onClick(clickHandler == null ? null : _ -> clickHandler.run());
     }
 
     /**

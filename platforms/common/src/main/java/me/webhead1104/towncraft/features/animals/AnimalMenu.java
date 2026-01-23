@@ -81,7 +81,7 @@ public class AnimalMenu extends TowncraftView {
             });
 
             context.slot(slot + 9).withItem(animalType.getProduct().getItemStack())
-                    .displayIf(animal::isProduct).updateOnClick().onClick(slotClickContext -> {
+                    .displayIf(animal::isProduct).updateOnClick().onClick(_ -> {
                         user.getBarn().addAmountToItem(animalType.getProduct().key(), 1);
                         user.addXp(animalType.getClaimXp());
                         animal.setProduct(false);
@@ -93,7 +93,7 @@ public class AnimalMenu extends TowncraftView {
             TowncraftItemStack stack = animalType.getFeed().getItemStack();
             stack.setLore(Msg.format("<white>%s", user.getBarn().getItem(animalType.getFeedKey())));
             slotRenderContext.setItem(stack);
-        }).onClick(slotClickContext -> {
+        }).onClick(_ -> {
             if (user.getBarn().getItem(animalType.getFeedKey()) >= 1) {
                 for (int i = 0; i < 6; ++i) {
                     Animals.AnimalBuilding.Animal animal = animals.getAnimalBuilding(animalType.key()).getAnimal(i);
