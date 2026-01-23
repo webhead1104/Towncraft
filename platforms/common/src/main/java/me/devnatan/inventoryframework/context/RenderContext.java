@@ -90,12 +90,12 @@ public final class RenderContext extends PlatformRenderContext<TowncraftItemComp
 
     @Override
     public void updateTitleForPlayer(@NotNull String title, @NotNull TowncraftPlayer player) {
-        ((TowncraftViewContainer) getContainer()).changeTitle(title, player);
+        ((TowncraftViewContainer) getContainer()).changeTitle(title);
     }
 
     @Override
     public void resetTitleForPlayer(@NotNull TowncraftPlayer player) {
-        ((TowncraftViewContainer) getContainer()).changeTitle(null, player);
+        ((TowncraftViewContainer) getContainer()).changeTitle(null);
     }
 
     /**

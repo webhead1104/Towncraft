@@ -63,21 +63,13 @@ public final class TowncraftViewContainer implements ViewContainer {
 
     @Override
     public String getTitle() {
-        final boolean diffTitle = inventory.getViewers().stream()
-                .map(TowncraftPlayer::getOpenInventory)
-                .map(TowncraftInventory::getTitle)
-                .distinct()
-                .findAny()
-                .isPresent();
-
-        if (diffTitle && shared) throw new IllegalStateException("Cannot get unique title of shared inventory");
-
-        return inventory.getViewers().getFirst().getOpenInventory().getTitleString();
+        return inventory.getTitleString();
     }
 
     @Override
     public String getTitle(@NotNull Viewer viewer) {
-        return ((TowncraftViewer) viewer).getPlayer().getOpenInventory().getTitleString();
+        //since we will probably never use shared contexts we can do this
+        return inventory.getTitleString();
     }
 
     @Override
@@ -171,12 +163,10 @@ public final class TowncraftViewContainer implements ViewContainer {
 
     @Override
     public void changeTitle(@Nullable Object title, @NotNull Viewer target) {
-        changeTitle(title, ((TowncraftViewer) target).getPlayer());
+        changeTitle(title);
     }
 
-    public void changeTitle(@Nullable Object title, @NotNull TowncraftPlayer player) {
-        TowncraftInventory inventory = player.getOpenInventory();
-        if (UNOPENABLES.contains(inventory.getType().name())) return;
+    public void changeTitle(@Nullable Object title) {
         if (title instanceof Component) {
             inventory.setTitle((Component) title);
             return;

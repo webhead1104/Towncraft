@@ -24,7 +24,6 @@
 package me.webhead1104.towncraft.platform;
 
 import me.webhead1104.towncraft.platform.inventory.TowncraftInventory;
-import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryPaperImpl;
 import me.webhead1104.towncraft.platform.inventory.TowncraftPlayerInventory;
 import me.webhead1104.towncraft.platform.inventory.TowncraftPlayerInventoryPaperImpl;
 import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
@@ -66,11 +65,6 @@ public record TowncraftPlayerPaperImpl(Player player) implements TowncraftPlayer
     @Override
     public void closeInventory() {
         player.closeInventory();
-    }
-
-    @Override
-    public TowncraftInventory getOpenInventory() {
-        return new TowncraftInventoryPaperImpl((Inventory) player.getOpenInventory());
     }
 
     @Override

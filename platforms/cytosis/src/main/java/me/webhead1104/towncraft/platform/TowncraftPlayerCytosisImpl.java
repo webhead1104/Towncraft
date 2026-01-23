@@ -24,7 +24,6 @@
 package me.webhead1104.towncraft.platform;
 
 import me.webhead1104.towncraft.platform.inventory.TowncraftInventory;
-import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryCytosisImpl;
 import me.webhead1104.towncraft.platform.inventory.TowncraftPlayerInventory;
 import me.webhead1104.towncraft.platform.inventory.TowncraftPlayerInventoryCytosisImpl;
 import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
@@ -61,11 +60,6 @@ public record TowncraftPlayerCytosisImpl(CytosisPlayer player) implements Towncr
     @Override
     public void closeInventory() {
         player.closeInventory();
-    }
-
-    @Override
-    public TowncraftInventory getOpenInventory() {
-        return new TowncraftInventoryCytosisImpl(player.getOpenInventory());
     }
 
     @Override

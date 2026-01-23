@@ -84,14 +84,6 @@ public class TowncraftPlayerTestImpl implements TowncraftPlayer {
     }
 
     @Override
-    public TowncraftInventory getOpenInventory() {
-        if (openInventory == null) {
-            return new TowncraftPlayerInventoryTestImpl();
-        }
-        return openInventory;
-    }
-
-    @Override
     public void sendMessage(Component message) {
         Preconditions.checkNotNull(message, "message cannot be null");
         log.info("Sent message: {}", MiniMessage.miniMessage().serialize(message));

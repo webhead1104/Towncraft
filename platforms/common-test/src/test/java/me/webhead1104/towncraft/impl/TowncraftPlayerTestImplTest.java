@@ -23,9 +23,7 @@
  */
 package me.webhead1104.towncraft.impl;
 
-import me.webhead1104.towncraft.menus.TowncraftInventoryType;
 import me.webhead1104.towncraft.platform.TowncraftPlayerTestImpl;
-import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryTestImpl;
 import me.webhead1104.towncraft.platform.inventory.TowncraftPlayerInventoryTestImpl;
 import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
@@ -85,62 +83,6 @@ class TowncraftPlayerTestImplTest {
 
         @Test
         void nullUuid() {
-            NullPointerException exception =
-                    assertThrows(NullPointerException.class, () -> new TowncraftPlayerTestImpl(null));
-            assertEquals("uuid cannot be null", exception.getMessage());
-        }
-    }
-
-    @Nested
-    class OpenInventory {
-        @Test
-        void defaultOpenInventory() {
-            assertNull(towncraftPlayerTestImpl.getOpenInventory());
-        }
-
-        @Test
-        void openInventory() {
-            TowncraftInventoryTestImpl inventory =
-                    new TowncraftInventoryTestImpl(TowncraftInventoryType.CHEST, 54, Msg.format("hello world"));
-
-            towncraftPlayerTestImpl.openInventory(inventory);
-            assertEquals(inventory, towncraftPlayerTestImpl.getOpenInventory());
-
-            assertTrue(inventory.getViewers().contains(towncraftPlayerTestImpl));
-
-            towncraftPlayerTestImpl.closeInventory();
-            assertNull(towncraftPlayerTestImpl.getOpenInventory());
-            assertFalse(inventory.getViewers().contains(towncraftPlayerTestImpl));
-
-
-            towncraftPlayerTestImpl.openInventory(inventory);
-            assertEquals(inventory, towncraftPlayerTestImpl.getOpenInventory());
-            assertTrue(inventory.getViewers().contains(towncraftPlayerTestImpl));
-
-            towncraftPlayerTestImpl.closeInventory();
-
-            assertNull(towncraftPlayerTestImpl.getOpenInventory());
-            assertFalse(inventory.getViewers().contains(towncraftPlayerTestImpl));
-        }
-
-        @Test
-        void closeInventory_WhenOpen() {
-            TowncraftInventoryTestImpl inventory =
-                    new TowncraftInventoryTestImpl(TowncraftInventoryType.CHEST, 54, Msg.format("hello world"));
-
-            towncraftPlayerTestImpl.openInventory(inventory);
-            towncraftPlayerTestImpl.closeInventory();
-            assertNull(towncraftPlayerTestImpl.getOpenInventory());
-        }
-
-        @Test
-        void closeInventory_WhenAlreadyClosed() {
-            towncraftPlayerTestImpl.closeInventory();
-            assertNull(towncraftPlayerTestImpl.getOpenInventory());
-        }
-
-        @Test
-        void nullOpenInventory() {
             NullPointerException exception =
                     assertThrows(NullPointerException.class, () -> new TowncraftPlayerTestImpl(null));
             assertEquals("uuid cannot be null", exception.getMessage());

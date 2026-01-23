@@ -43,8 +43,6 @@ public interface TowncraftPlayer {
 
     void closeInventory();
 
-    TowncraftInventory getOpenInventory();
-
     void sendMessage(Component message);
 
     TowncraftItemStack getItemOnCursor();
