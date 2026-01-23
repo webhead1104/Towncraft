@@ -25,7 +25,7 @@ package me.webhead1104.towncraft;
 
 import lombok.Getter;
 import me.webhead1104.towncraft.commands.TowncraftCommand;
-import me.webhead1104.towncraft.impl.TowncraftPlayerPaperImpl;
+import me.webhead1104.towncraft.platform.TowncraftPlayerPaperImpl;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

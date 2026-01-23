@@ -26,9 +26,9 @@ package me.webhead1104.towncraft.features.world.build;
 import me.devnatan.inventoryframework.ViewConfigBuilder;
 import me.devnatan.inventoryframework.context.RenderContext;
 import me.webhead1104.towncraft.Towncraft;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
 import me.webhead1104.towncraft.menus.TowncraftView;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
 import org.jetbrains.annotations.NotNull;
 
 public class BuildMenu extends TowncraftView {

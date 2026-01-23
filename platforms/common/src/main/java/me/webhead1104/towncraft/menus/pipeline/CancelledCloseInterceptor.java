@@ -26,9 +26,9 @@ package me.webhead1104.towncraft.menus.pipeline;
 import me.devnatan.inventoryframework.VirtualView;
 import me.devnatan.inventoryframework.pipeline.PipelineContext;
 import me.devnatan.inventoryframework.pipeline.PipelineInterceptor;
-import me.webhead1104.towncraft.TowncraftPlayer;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
 import me.webhead1104.towncraft.menus.context.CloseContext;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
 
 public class CancelledCloseInterceptor implements PipelineInterceptor<VirtualView> {
 

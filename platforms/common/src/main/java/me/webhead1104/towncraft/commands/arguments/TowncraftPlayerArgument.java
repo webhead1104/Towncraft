@@ -24,7 +24,7 @@
 package me.webhead1104.towncraft.commands.arguments;
 
 import me.webhead1104.towncraft.Towncraft;
-import me.webhead1104.towncraft.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.command.CommandActor;
 import revxrsal.commands.command.CommandParameter;

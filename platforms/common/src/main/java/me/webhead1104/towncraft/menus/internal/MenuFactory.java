@@ -24,9 +24,9 @@
 package me.webhead1104.towncraft.menus.internal;
 
 import me.devnatan.inventoryframework.ViewType;
-import me.webhead1104.towncraft.factories.TowncraftInventoryFactory;
-import me.webhead1104.towncraft.items.TowncraftInventory;
 import me.webhead1104.towncraft.menus.TowncraftInventoryType;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventory;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryFactory;
 import net.kyori.adventure.text.Component;
 
 public class MenuFactory {

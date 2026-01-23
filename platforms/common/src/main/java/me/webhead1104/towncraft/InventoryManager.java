@@ -23,7 +23,8 @@
  */
 package me.webhead1104.towncraft;
 
-import me.webhead1104.towncraft.items.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

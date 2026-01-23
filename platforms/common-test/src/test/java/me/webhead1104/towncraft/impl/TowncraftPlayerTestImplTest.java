@@ -23,11 +23,12 @@
  */
 package me.webhead1104.towncraft.impl;
 
-import me.webhead1104.towncraft.impl.items.TowncraftInventoryTestImpl;
-import me.webhead1104.towncraft.impl.items.TowncraftPlayerInventoryTestImpl;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
 import me.webhead1104.towncraft.menus.TowncraftInventoryType;
+import me.webhead1104.towncraft.platform.TowncraftPlayerTestImpl;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryTestImpl;
+import me.webhead1104.towncraft.platform.inventory.TowncraftPlayerInventoryTestImpl;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
 import me.webhead1104.towncraft.utils.Msg;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

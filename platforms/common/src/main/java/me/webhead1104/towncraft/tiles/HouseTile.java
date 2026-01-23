@@ -27,9 +27,9 @@ import com.google.errorprone.annotations.Keep;
 import lombok.Getter;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.world.build.HouseType;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
 import me.webhead1104.towncraft.menus.context.SlotRenderContext;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
 import me.webhead1104.towncraft.utils.Msg;
 
 @Getter

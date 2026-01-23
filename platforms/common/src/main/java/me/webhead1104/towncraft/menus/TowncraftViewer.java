@@ -28,7 +28,7 @@ import me.devnatan.inventoryframework.ViewContainer;
 import me.devnatan.inventoryframework.ViewType;
 import me.devnatan.inventoryframework.Viewer;
 import me.devnatan.inventoryframework.context.IFRenderContext;
-import me.webhead1104.towncraft.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Deque;

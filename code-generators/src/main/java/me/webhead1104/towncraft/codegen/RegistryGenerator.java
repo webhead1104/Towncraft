@@ -42,7 +42,7 @@ public record RegistryGenerator(Path outputFolder) implements TowncraftCodeGener
         ensureDirectory(outputFolder);
 
         ClassName typeClass = ClassName.get(packageName, typeName);
-        ClassName loaderClass = ClassName.get("me.webhead1104.towncraft.factories", loaderName);
+        ClassName loaderClass = ClassName.get(packageName, loaderName);
         JsonObject json = GSON.fromJson(new InputStreamReader(resourceFile), JsonObject.class);
         ClassName generatedCN = ClassName.get(packageName, generatedName);
         // BlockConstants class

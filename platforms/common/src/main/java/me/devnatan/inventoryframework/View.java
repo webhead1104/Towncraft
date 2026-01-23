@@ -28,7 +28,6 @@ import me.devnatan.inventoryframework.context.RenderContext;
 import me.devnatan.inventoryframework.pipeline.Pipeline;
 import me.devnatan.inventoryframework.pipeline.StandardPipelinePhases;
 import me.webhead1104.towncraft.TowncraftPlatformManager;
-import me.webhead1104.towncraft.TowncraftPlayer;
 import me.webhead1104.towncraft.menus.component.TowncraftItemComponentBuilder;
 import me.webhead1104.towncraft.menus.context.CloseContext;
 import me.webhead1104.towncraft.menus.context.Context;
@@ -37,6 +36,7 @@ import me.webhead1104.towncraft.menus.pipeline.CancelledCloseInterceptor;
 import me.webhead1104.towncraft.menus.pipeline.GlobalClickInterceptor;
 import me.webhead1104.towncraft.menus.pipeline.ItemClickInterceptor;
 import me.webhead1104.towncraft.menus.pipeline.ItemCloseOnClickInterceptor;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import org.jetbrains.annotations.ApiStatus;
 
 /**

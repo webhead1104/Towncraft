@@ -25,8 +25,8 @@ package me.webhead1104.towncraft.utils;
 
 import lombok.experimental.UtilityClass;
 import me.webhead1104.towncraft.dataLoaders.ItemType;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.StringUtils;
 

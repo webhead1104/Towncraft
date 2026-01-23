@@ -31,17 +31,13 @@ import me.devnatan.inventoryframework.context.IFRenderContext;
 import me.devnatan.inventoryframework.context.IFSlotClickContext;
 import me.devnatan.inventoryframework.pipeline.StandardPipelinePhases;
 import me.webhead1104.towncraft.TowncraftPlatformManager;
-import me.webhead1104.towncraft.TowncraftPlayer;
 import me.webhead1104.towncraft.events.TowncraftInventoryClickEvent;
 import me.webhead1104.towncraft.events.TowncraftInventoryCloseEvent;
-import me.webhead1104.towncraft.impl.TowncraftPlayerImpl;
-import me.webhead1104.towncraft.impl.items.TowncraftInventoryImpl;
-import me.webhead1104.towncraft.impl.items.TowncraftInventoryViewImpl;
-import me.webhead1104.towncraft.impl.items.TowncraftItemStackImpl;
-import me.webhead1104.towncraft.impl.items.TowncraftPlayerInventoryImpl;
-import me.webhead1104.towncraft.items.TowncraftInventory;
-import me.webhead1104.towncraft.items.TowncraftInventoryView;
 import me.webhead1104.towncraft.menus.ClickType;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.TowncraftPlayerCytosisImpl;
+import me.webhead1104.towncraft.platform.inventory.*;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStackCytosisImpl;
 import net.cytonic.cytosis.events.api.Listener;
 import net.cytonic.cytosis.player.CytosisPlayer;
 import net.minestom.server.event.inventory.InventoryCloseEvent;
@@ -64,7 +60,7 @@ public class IFListener {
         }
 
         int slot = getSlot(minestomEvent.getSlot(), size, !isPlayerInventory);
-        TowncraftPlayer player = new TowncraftPlayerImpl((CytosisPlayer) minestomEvent.getPlayer());
+        TowncraftPlayer player = new TowncraftPlayerCytosisImpl((CytosisPlayer) minestomEvent.getPlayer());
         Viewer viewer = viewFrame.getViewer(player);
         if (viewer == null) return;
 
@@ -97,7 +93,7 @@ public class IFListener {
         }
 
         RootView root = context.getRoot();
-        TowncraftInventoryView view = new TowncraftInventoryViewImpl(
+        TowncraftInventoryView view = new TowncraftInventoryViewCytosisImpl(
                 (CytosisPlayer) minestomEvent.getPlayer(),
                 minestomEvent.getPlayer().getOpenInventory(),
                 minestomEvent.getPlayer().getInventory()
@@ -105,16 +101,16 @@ public class IFListener {
 
         TowncraftInventory clickedInventory;
         if (minestomEvent.getInventory() instanceof PlayerInventory playerInventory) {
-            clickedInventory = new TowncraftPlayerInventoryImpl(playerInventory);
+            clickedInventory = new TowncraftPlayerInventoryCytosisImpl(playerInventory);
         } else {
-            clickedInventory = new TowncraftInventoryImpl(minestomEvent.getInventory());
+            clickedInventory = new TowncraftInventoryCytosisImpl(minestomEvent.getInventory());
         }
         TowncraftInventoryClickEvent towncraftEvent = new TowncraftInventoryClickEvent(
                 view,
                 slot,
                 getClickType(minestomEvent.getClick()),
                 (minestomEvent.getClick() instanceof Click.HotbarSwap swap) ? swap.hotbarSlot() : -999,
-                new TowncraftItemStackImpl(minestomEvent.getClickedItem()),
+                new TowncraftItemStackCytosisImpl(minestomEvent.getClickedItem()),
                 clickedInventory
         );
         IFSlotClickContext clickContext =
@@ -159,7 +155,7 @@ public class IFListener {
 
     @Listener
     public void onInventoryClose(final InventoryCloseEvent minestomEvent) {
-        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerImpl((CytosisPlayer) minestomEvent.getPlayer()));
+        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerCytosisImpl((CytosisPlayer) minestomEvent.getPlayer()));
         if (viewer == null) return;
 
         final IFRenderContext context = viewer.getCurrentContext();
@@ -172,7 +168,7 @@ public class IFListener {
 
     @Listener
     public void onQuit(final PlayerDisconnectEvent minestomEvent) {
-        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerImpl((CytosisPlayer) minestomEvent.getPlayer()));
+        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerCytosisImpl((CytosisPlayer) minestomEvent.getPlayer()));
         if (viewer == null) return;
 
         final IFRenderContext context = viewer.getCurrentContext();
@@ -183,7 +179,7 @@ public class IFListener {
     }
 
     private TowncraftInventoryCloseEvent getTowncraftInventoryCloseEvent(InventoryCloseEvent minestomEvent) {
-        TowncraftInventoryView view = new TowncraftInventoryViewImpl(
+        TowncraftInventoryView view = new TowncraftInventoryViewCytosisImpl(
                 (CytosisPlayer) minestomEvent.getPlayer(),
                 minestomEvent.getInventory(),
                 minestomEvent.getPlayer().getInventory()
@@ -195,7 +191,7 @@ public class IFListener {
     @Listener
     public void onItemPickup(PickupItemEvent event) {
         if (!(event.getEntity() instanceof CytosisPlayer player)) return;
-        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerImpl(player));
+        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerCytosisImpl(player));
         if (viewer == null) return;
 
         final IFContext context = viewer.getActiveContext();
@@ -206,7 +202,7 @@ public class IFListener {
 
     @Listener
     public void onItemDrop(ItemDropEvent event) {
-        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerImpl((CytosisPlayer) event.getPlayer()));
+        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerCytosisImpl((CytosisPlayer) event.getPlayer()));
         if (viewer == null) return;
 
         final IFContext context = viewer.getActiveContext();
@@ -219,7 +215,7 @@ public class IFListener {
     public void onInventoryDrag(InventoryPreClickEvent event) {
         if (!(event.getClick() instanceof Click.Drag drag)) return;
 
-        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerImpl((CytosisPlayer) event.getPlayer()));
+        final Viewer viewer = viewFrame.getViewer(new TowncraftPlayerCytosisImpl((CytosisPlayer) event.getPlayer()));
         if (viewer == null) return;
 
         final IFContext context = viewer.getActiveContext();

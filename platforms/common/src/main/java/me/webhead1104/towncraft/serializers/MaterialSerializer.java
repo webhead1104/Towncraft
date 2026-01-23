@@ -24,8 +24,8 @@
 package me.webhead1104.towncraft.serializers;
 
 import com.google.errorprone.annotations.Keep;
-import me.webhead1104.towncraft.factories.TowncraftMaterialFactory;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterialFactory;
 import net.kyori.adventure.key.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

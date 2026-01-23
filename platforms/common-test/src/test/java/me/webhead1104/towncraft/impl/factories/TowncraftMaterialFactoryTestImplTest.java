@@ -23,9 +23,10 @@
  */
 package me.webhead1104.towncraft.impl.factories;
 
-import me.webhead1104.towncraft.factories.TowncraftMaterialFactory;
-import me.webhead1104.towncraft.impl.items.TowncraftMaterialTestImpl;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterialFactory;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterialFactoryTestImpl;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterialTestImpl;
 import net.kyori.adventure.key.Key;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

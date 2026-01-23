@@ -24,9 +24,9 @@
 package me.webhead1104.towncraft.events;
 
 import lombok.Getter;
-import me.webhead1104.towncraft.TowncraftPlayer;
-import me.webhead1104.towncraft.items.TowncraftInventory;
-import me.webhead1104.towncraft.items.TowncraftInventoryView;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventory;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

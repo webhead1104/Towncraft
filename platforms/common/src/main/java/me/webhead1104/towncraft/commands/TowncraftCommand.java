@@ -25,12 +25,12 @@ package me.webhead1104.towncraft.commands;
 
 import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.TowncraftPlatformManager;
-import me.webhead1104.towncraft.TowncraftPlayer;
 import me.webhead1104.towncraft.features.animals.AnimalMenu;
 import me.webhead1104.towncraft.features.animals.AnimalType;
 import me.webhead1104.towncraft.features.factories.FactoryMenu;
 import me.webhead1104.towncraft.features.factories.FactoryType;
 import me.webhead1104.towncraft.features.world.WorldUtils;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Description;
 import revxrsal.commands.annotation.Subcommand;

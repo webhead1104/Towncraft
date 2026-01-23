@@ -24,10 +24,10 @@
 package me.webhead1104.towncraft.events;
 
 import lombok.Getter;
-import me.webhead1104.towncraft.items.TowncraftInventory;
-import me.webhead1104.towncraft.items.TowncraftInventoryView;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
 import me.webhead1104.towncraft.menus.ClickType;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventory;
+import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryView;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
 
 @Getter
 public class TowncraftInventoryClickEvent extends TowncraftInventoryInteractEvent {

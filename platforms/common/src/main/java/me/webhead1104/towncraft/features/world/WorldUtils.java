@@ -25,11 +25,11 @@ package me.webhead1104.towncraft.features.world;
 
 import lombok.experimental.UtilityClass;
 import me.webhead1104.towncraft.Towncraft;
-import me.webhead1104.towncraft.TowncraftPlayer;
 import me.webhead1104.towncraft.data.TileSize;
 import me.webhead1104.towncraft.data.objects.WorldSection;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
 import me.webhead1104.towncraft.tiles.BuildingTile;
 import me.webhead1104.towncraft.tiles.Tile;
 import me.webhead1104.towncraft.utils.Msg;

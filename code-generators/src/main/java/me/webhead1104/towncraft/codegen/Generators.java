@@ -41,7 +41,7 @@ public final class Generators {
         Path outputFolder = Path.of(args[0]);
 
         RegistryGenerator generator = new RegistryGenerator(outputFolder);
-        generator.generate(resource("item.json"), "me.webhead1104.towncraft.items", "TowncraftMaterial", "TowncraftMaterialFactory", "TowncraftMaterials");
+        generator.generate(resource("item.json"), "me.webhead1104.towncraft.platform.item", "TowncraftMaterial", "TowncraftMaterialFactory", "TowncraftMaterials");
 
         System.out.println("Finished generating code");
     }

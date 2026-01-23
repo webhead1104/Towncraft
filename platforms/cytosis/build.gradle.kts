@@ -42,7 +42,7 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(25))
 }
 
-val generateClassloader = tasks.register("generateClassloader") {
+val generateClassloader: TaskProvider<Task> = tasks.register("generateClassloader") {
     val outputDir: File = file("$projectDir/build/generated/sources/classloader")
     val packageDir = File(outputDir, "me/webhead1104/towncraft")
     val classloaderFile = File(packageDir, "Main.java")
@@ -132,9 +132,8 @@ tasks.compileJava {
 
 tasks {
     runCytosis {
-        cytosisVersion("1.0-SNAPSHOT")
+        cytosisVersion(libs.versions.cytosis.get())
         runDirectory.set(rootProject.layout.projectDirectory.dir("run/cytosis"))
-        jvmArgs = listOf("-XX:+AllowEnhancedClassRedefinition")
     }
     assemble {
         dependsOn(shadowJar)

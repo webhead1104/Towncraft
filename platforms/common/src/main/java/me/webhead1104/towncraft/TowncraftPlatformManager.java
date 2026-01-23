@@ -42,6 +42,8 @@ import me.webhead1104.towncraft.database.LoaderManager;
 import me.webhead1104.towncraft.database.UserLoader;
 import me.webhead1104.towncraft.features.animals.AnimalType;
 import me.webhead1104.towncraft.features.factories.FactoryType;
+import me.webhead1104.towncraft.platform.TowncraftPlatform;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.BuildInfo;
 import me.webhead1104.towncraft.utils.ClassGraphUtils;
 import net.kyori.adventure.util.Services;

@@ -25,8 +25,8 @@ package me.webhead1104.towncraft.menus.context;
 
 import me.devnatan.inventoryframework.context.IFConfinedContext;
 import me.devnatan.inventoryframework.context.IFOpenContext;
-import me.webhead1104.towncraft.TowncraftPlayer;
 import me.webhead1104.towncraft.data.objects.User;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;

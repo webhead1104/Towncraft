@@ -26,11 +26,11 @@ package me.webhead1104.towncraft.features.world;
 import me.devnatan.inventoryframework.ViewConfigBuilder;
 import me.devnatan.inventoryframework.context.RenderContext;
 import me.webhead1104.towncraft.TowncraftPlatformManager;
-import me.webhead1104.towncraft.TowncraftPlayer;
-import me.webhead1104.towncraft.items.TowncraftItemStack;
-import me.webhead1104.towncraft.items.TowncraftMaterial;
 import me.webhead1104.towncraft.menus.TowncraftView;
 import me.webhead1104.towncraft.menus.context.SlotClickContext;
+import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
 import me.webhead1104.towncraft.utils.Msg;
 import org.jetbrains.annotations.NotNull;
 
