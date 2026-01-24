@@ -1,76 +1,49 @@
 # Towncraft
 
-[![Build](https://github.com/Webhead1104/Towncraft/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/Webhead1104/Towncraft/actions/workflows/qodana_code_quality.yml)
+**Towncraft** brings Township to Minecraft. If you've played the mobile game by Playrix and thought "I wish I could do
+this in Minecraft," that's what this plugin does.
 
-Towncraft is a remake of Township for PaperMC. Place buildings, grow crops, produce resources, and fulfill train orders.
+## What is this?
 
-Based on the Township mobile game by Playrix (fan project, non‑commercial).
+This is a recreation of Township as a PaperMC plugin. You get the same town-building, farming, and factory management
+gameplay, just in Minecraft.
 
-## Current Status & Roadmap
+**The basics:**
 
-- Content available: up to level 10.
-- Roadmap: new features and content will be released in 10‑level increments (e.g., 1–10 → 11–20 → 21–30 → 31–40, etc.).
+- Your town sits on an 8×8 grid. Each section has 54 tiles where you can place houses, buildings, and fields
+- Run `/towncraft` to open your town menu and manage everything through chest GUIs
+- Plant wheat, feed animals, run factories, and fulfill orders to level up
 
-## Features
+**What's in it:**
 
-- Production chains: animals, factories, and production recipes
-- Train delivery system with timed orders
-- Storage and inventory management
-- Farm plots and town expansion mechanics
-- Community buildings, housing, and population system
-- Player‑friendly GUI menus
+- Farming: Plant and harvest wheat fields
+- Animals: Cows, chickens, and sheep that produce resources
+- Factories: Bakery, Feed Mill, Dairy Factory, Sugar Factory, Textile Factory—all with proper production chains (wheat →
+  cow feed → milk → dairy products, etc.)
+- Train: Accept orders, fill them with goods, get construction materials back
+- Helicopter: Fulfill item requests for coins and XP
+- Buildings: All the houses and community buildings from Township levels 1–10
+- Progression: Same XP and leveling system as Township
 
-## How It Works
+## Why would you want this?
 
-Navigate your town through inventory menus using `/towncraft`. Your world consists of an 8×8 grid of sections, each
-containing 54 buildable tiles. Use arrow controls to move between sections. Buildings occupy multiple tiles based on
-their size (e.g., barn = 3×3).
+Honestly? Because you like Township and want to play it in Minecraft. This isn't trying to be a general-purpose economy
+plugin or add new mechanics to survival—it's specifically for Township fans.
 
-## Requirements
+Everything works like it does in the mobile game. The production chains, the building placement, the train and
+helicopter mechanics—it's all kept as close to the original as possible.
 
-- PaperMC
-- Java 17+
+## Before you download
 
-## Installation
+**You need PaperMC** (Java 21+). This won't work on Spigot or Bukkit.
 
-1) Download the Towncraft plugin JAR from Releases.
-2) Place it into your server's `plugins/` folder.
-3) Start or restart the server.
-4) Optional: choose your storage backend in `plugins/Towncraft/config.yml`.
+**Current status:** All the level 1–10 content is in and functional. You can play through it right now. Some balancing
+is still being tweaked (animal times are a bit long), and more content is planned in 10-level increments.
 
-Quick start in‑game: use `/towncraft` to open the main menu.
+**Each player gets their own town.** Visiting another player's town isn't in yet, but is planned.
 
-## Configuration
+**Storage:**
+Defaults to local files, but you can use MySQL or MongoDB if you want.
+Currently, you cannot move user data to another storage provider, but this is planned.
 
-Storage backends (pick what fits your server):
-
-- Local files (default, zero setup)
-- MySQL (good for networks)
-- MongoDB (alternative database)
-
-Player data saves automatically.
-
-## Commands
-
-- `/towncraft` — opens the main Towncraft menu for the player.
-
-Permissions: defaults are intended for general use. Fine‑grained permissions may be added as the project evolves.
-
-## Contributing
-
-Contributions are very welcome!
-
-- File bugs and feature requests in Issues.
-- Submit PRs for fixes or features — especially for upcoming 10‑level content increments.
-- If proposing a larger change, please open an issue first to discuss design.
-
-## Attribution & Disclaimer
-
-- Game mechanics are recreated from the Township Wiki (CC‑BY‑SA). This project is not affiliated with Playrix
-  Entertainment.
-- All plugin code is written from scratch for Minecraft servers.
-
-## Support
-
-- Questions or ideas? Open an issue.
-- Found a bug? Include server version, plugin version, logs, and steps to reproduce.
+**This is a fan project**—not affiliated with Playrix, just made by someone who likes Township.
