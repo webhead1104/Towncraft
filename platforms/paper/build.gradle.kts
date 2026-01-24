@@ -1,3 +1,5 @@
+import me.modmuss50.mpp.ReleaseType
+
 plugins {
     id("java")
     id("xyz.jpenilla.resource-factory-paper-convention") version "1.3.1"
@@ -74,6 +76,30 @@ sourceSets {
 }
 
 tasks {
+    publishMods {
+        file = shadowJar.get().archiveFile
+        changelog.set(
+            providers.environmentVariable("CHANGELOG")
+                .orElse("## What's Changed\n\nSee commit history for details.")
+        )
+        val versionString = version.get()
+        type.set(
+            if (versionString.contains("-beta") || versionString.contains("-alpha")) {
+                ReleaseType.BETA
+            } else {
+                ReleaseType.STABLE
+            }
+        )
+        modLoaders.add("paper")
+
+        modrinth {
+            accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
+            projectId.set("EQW4ZtSp")
+            minecraftVersions.add(minecraftVersion)
+            displayName.set("Towncraft v${project.version}")
+        }
+    }
+
     jar {
         enabled = false
     }
