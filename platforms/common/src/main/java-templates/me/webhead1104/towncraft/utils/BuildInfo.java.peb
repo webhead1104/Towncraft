@@ -6,7 +6,6 @@ package me.webhead1104.towncraft.utils;
  */
 public final class BuildInfo {
     public static final String VERSION = "{{ version }}";
-    public static final Boolean IS_DEV = {{ isDev }};
 
     private BuildInfo() {
         throw new UnsupportedOperationException("This class cannot be instantiated");
