@@ -31,7 +31,7 @@ import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.TowncraftPlatformManager;
 import me.webhead1104.towncraft.dataLoaders.LevelDataLoader;
 import me.webhead1104.towncraft.features.world.build.BuildingType;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.Msg;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
@@ -49,7 +49,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    public static final int LATEST_VERSION = 15;
+    public static final int LATEST_VERSION = 16;
     private int version = LATEST_VERSION;
     private UUID uuid;
     private String townName;

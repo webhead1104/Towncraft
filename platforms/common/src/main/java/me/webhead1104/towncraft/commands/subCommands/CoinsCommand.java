@@ -25,7 +25,7 @@ package me.webhead1104.towncraft.commands.subCommands;
 
 import me.webhead1104.towncraft.commands.CommandUtils;
 import me.webhead1104.towncraft.data.objects.User;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.Msg;
 import revxrsal.commands.annotation.Range;
 import revxrsal.commands.annotation.Subcommand;

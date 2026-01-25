@@ -24,7 +24,7 @@
 package me.webhead1104.towncraft.commands.subCommands;
 
 import com.google.errorprone.annotations.Keep;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.Msg;
 import revxrsal.commands.annotation.Range;
 import revxrsal.commands.annotation.Subcommand;

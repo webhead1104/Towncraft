@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 @Keep
-public class UserVersion15 implements DataVersion {
+public final class UserVersion15 implements DataVersion {
     private static final int EVENT_CENTER_SECTION = 28;
     private static final int EVENT_CENTER_START_SLOT = 3;
     private static final TileSize EVENT_CENTER_SIZE = new TileSize(3, 5);

@@ -28,8 +28,8 @@ import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.barn.BarnMenu;
 import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.menus.context.SlotRenderContext;
-import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
-import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.common.item.TowncraftMaterial;
 import me.webhead1104.towncraft.utils.Msg;
 
 public class BarnTile extends BuildingTile {

@@ -32,7 +32,5 @@ data class FactoryTile(val factoryType: String) : Tile()
 data object HelicopterTile : Tile()
 data class HouseTile(val houseType: String) : Tile()
 data class PlotTile(val plotType: String = "none") : Tile()
-data class StaticWorldTile(val material: String) : Tile()
 data object TrainTile : Tile()
-
-val TOWN_HALL_TILE = StaticWorldTile("minecraft:cobblestone")
+data object TownHallTile : Tile()

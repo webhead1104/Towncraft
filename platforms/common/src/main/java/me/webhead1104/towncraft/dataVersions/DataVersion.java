@@ -34,6 +34,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public interface DataVersion {
     ConfigurationTransformation getTransformation();
 
@@ -56,11 +57,24 @@ public interface DataVersion {
     }
 
     default void replaceBuilding(ConfigurationNode node, Supplier<ConfigurationNode> nodeToMatch) {
+        replaceBuilding(node, nodeToMatch, () -> {
+            ConfigurationNode replacement = createNode();
+            replacement.node("class").raw("StaticWorldTile");
+            replacement.node("properties").raw("minecraft:grass_block");
+            return replacement;
+        });
+    }
+
+    default void replaceBuilding(ConfigurationNode node, Supplier<ConfigurationNode> nodeToMatch, ConfigurationNode replacement) {
+        replaceBuilding(node, nodeToMatch, () -> replacement);
+    }
+
+    default void replaceBuilding(ConfigurationNode node, Supplier<ConfigurationNode> nodeToMatch, Supplier<ConfigurationNode> replacement) {
         ConfigurationNode nodeToMatchNode = nodeToMatch.get();
+        ConfigurationNode replacementNode = replacement.get();
         runInAllWorldTiles(node, tile -> {
             if (nodesEqual(tile, nodeToMatchNode)) {
-                tile.node("class").raw("StaticWorldTile");
-                tile.node("properties", "material").raw("minecraft:grass_block");
+                tile.from(replacementNode);
             }
         });
     }

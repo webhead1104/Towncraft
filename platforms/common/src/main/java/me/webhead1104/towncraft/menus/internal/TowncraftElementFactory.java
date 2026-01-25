@@ -41,8 +41,8 @@ import me.webhead1104.towncraft.menus.context.CloseContext;
 import me.webhead1104.towncraft.menus.context.Context;
 import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.menus.context.SlotRenderContext;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
-import me.webhead1104.towncraft.platform.inventory.TowncraftInventory;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.inventory.TowncraftInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

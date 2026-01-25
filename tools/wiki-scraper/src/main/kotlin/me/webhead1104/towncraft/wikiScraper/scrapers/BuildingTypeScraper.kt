@@ -157,20 +157,20 @@ class BuildingTypeScraper : Scraper<BuildingTypeScraper.BuildingType> {
     )
 
     companion object {
-        val SPECIAL_BUILDING_TILES: MutableMap<String, Tile> = HashMap()
-        val SPECIAL_BUILDING_TILESIZE: MutableMap<String, TileSize> = HashMap()
-        val NOT_IN_MENU: MutableList<String?> = ArrayList()
-
-        init {
-            SPECIAL_BUILDING_TILES["barn"] = BarnTile
-            SPECIAL_BUILDING_TILES["helicopter"] = HelicopterTile
-            SPECIAL_BUILDING_TILES["town_hall"] = TOWN_HALL_TILE
-            SPECIAL_BUILDING_TILES["event_center"] = EventCenterTile
-            SPECIAL_BUILDING_TILESIZE["event_center"] = TileSize(3, 5)
-            NOT_IN_MENU.add("event_center")
-            SPECIAL_BUILDING_TILES["train"] = TrainTile
-            SPECIAL_BUILDING_TILESIZE["train"] = TileSize(1, 3)
-            NOT_IN_MENU.add("train")
+        val SPECIAL_BUILDING_TILES: Map<String, Tile> = buildMap {
+            put("barn", BarnTile)
+            put("helicopter", HelicopterTile)
+            put("town_hall", TownHallTile)
+            put("event_center", EventCenterTile)
+            put("train", TrainTile)
+        }
+        val SPECIAL_BUILDING_TILESIZE: Map<String, TileSize> = buildMap {
+            put("event_center", TileSize(3, 5))
+            put("train", TileSize(1, 3))
+        }
+        val NOT_IN_MENU: List<String> = buildList {
+            add("event_center")
+            add("train")
         }
     }
 }

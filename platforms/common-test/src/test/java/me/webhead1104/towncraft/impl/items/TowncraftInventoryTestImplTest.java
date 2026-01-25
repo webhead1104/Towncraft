@@ -24,11 +24,11 @@
 package me.webhead1104.towncraft.impl.items;
 
 import me.webhead1104.towncraft.menus.TowncraftInventoryType;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
-import me.webhead1104.towncraft.platform.TowncraftPlayerTestImpl;
-import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryTestImpl;
-import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
-import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.common.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.test.TowncraftPlayerTestImpl;
+import me.webhead1104.towncraft.platform.test.inventory.TowncraftInventoryTestImpl;
 import me.webhead1104.towncraft.utils.Msg;
 import net.kyori.adventure.text.Component;
 import org.junit.jupiter.api.BeforeEach;

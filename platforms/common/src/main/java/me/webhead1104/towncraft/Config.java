@@ -27,7 +27,7 @@ import com.google.common.base.Stopwatch;
 import lombok.Getter;
 import lombok.Setter;
 import me.webhead1104.towncraft.database.LoaderManager;
-import me.webhead1104.towncraft.platform.TowncraftPlatform;
+import me.webhead1104.towncraft.platform.common.TowncraftPlatform;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.loader.HeaderMode;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;

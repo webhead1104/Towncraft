@@ -23,9 +23,9 @@
  */
 package me.webhead1104.towncraft.impl.items;
 
-import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
-import me.webhead1104.towncraft.platform.item.TowncraftItemStackTestImpl;
-import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.common.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.test.item.TowncraftItemStackTestImpl;
 import me.webhead1104.towncraft.utils.Msg;
 import net.kyori.adventure.text.Component;
 import org.junit.jupiter.api.BeforeEach;

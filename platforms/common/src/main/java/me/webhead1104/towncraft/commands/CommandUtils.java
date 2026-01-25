@@ -24,7 +24,7 @@
 package me.webhead1104.towncraft.commands;
 
 import lombok.experimental.UtilityClass;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.Msg;
 
 @UtilityClass

@@ -33,7 +33,7 @@ import me.devnatan.inventoryframework.utils.SlotConverter;
 import me.webhead1104.towncraft.menus.context.Context;
 import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.menus.context.SlotRenderContext;
-import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

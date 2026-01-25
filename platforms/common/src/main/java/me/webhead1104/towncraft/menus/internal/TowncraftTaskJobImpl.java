@@ -24,8 +24,8 @@
 package me.webhead1104.towncraft.menus.internal;
 
 import me.devnatan.inventoryframework.internal.Job;
-import me.webhead1104.towncraft.platform.Scheduler;
-import me.webhead1104.towncraft.platform.TowncraftTask;
+import me.webhead1104.towncraft.platform.common.Scheduler;
+import me.webhead1104.towncraft.platform.common.TowncraftTask;
 
 class TowncraftTaskJobImpl implements Job {
 

@@ -27,7 +27,7 @@ import me.devnatan.inventoryframework.*;
 import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.menus.TowncraftViewer;
 import me.webhead1104.towncraft.menus.context.Context;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -31,7 +31,7 @@ import me.devnatan.inventoryframework.feature.FeatureInstaller;
 import me.devnatan.inventoryframework.internal.PlatformUtils;
 import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.menus.internal.TowncraftElementFactory;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 

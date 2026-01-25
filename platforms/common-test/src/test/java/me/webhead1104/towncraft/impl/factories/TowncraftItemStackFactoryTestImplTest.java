@@ -23,7 +23,11 @@
  */
 package me.webhead1104.towncraft.impl.factories;
 
-import me.webhead1104.towncraft.platform.item.*;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStackFactory;
+import me.webhead1104.towncraft.platform.common.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.test.item.TowncraftItemStackFactoryTestImpl;
+import me.webhead1104.towncraft.platform.test.item.TowncraftItemStackTestImpl;
+import me.webhead1104.towncraft.platform.test.item.TowncraftMaterialTestImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -31,7 +31,7 @@ import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.data.objects.Animals;
 import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
 import me.webhead1104.towncraft.utils.Utils;
 import net.kyori.adventure.key.Key;

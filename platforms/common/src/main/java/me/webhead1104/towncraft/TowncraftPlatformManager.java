@@ -42,8 +42,8 @@ import me.webhead1104.towncraft.database.LoaderManager;
 import me.webhead1104.towncraft.database.UserLoader;
 import me.webhead1104.towncraft.features.animals.AnimalType;
 import me.webhead1104.towncraft.features.factories.FactoryType;
-import me.webhead1104.towncraft.platform.TowncraftPlatform;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlatform;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.BuildInfo;
 import me.webhead1104.towncraft.utils.ClassGraphUtils;
 import net.kyori.adventure.util.Services;
@@ -214,6 +214,7 @@ public class TowncraftPlatformManager {
     private static void loadDataVersions() {
         versionedBuilder.versionKey("version");
         for (DataVersion dataVersion : new ArrayList<>(ClassGraphUtils.getImplementedClasses(DataVersion.class, "me.webhead1104.towncraft.dataVersions"))) {
+            if (dataVersion.getVersion() >= User.LATEST_VERSION) continue;
             versionedBuilder.addVersion(dataVersion.getVersion(), dataVersion.getTransformation());
         }
     }

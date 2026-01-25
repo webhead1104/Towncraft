@@ -58,10 +58,7 @@
         },
         "time": "",
         "tile": {
-          "class": "StaticWorldTile",
-          "properties": {
-            "material": "minecraft:cobblestone"
-          }
+          "class": "TownHallTile"
         },
         "xp": 0,
         "size": "2x2"

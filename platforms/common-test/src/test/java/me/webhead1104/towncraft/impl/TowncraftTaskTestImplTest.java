@@ -23,7 +23,7 @@
  */
 package me.webhead1104.towncraft.impl;
 
-import me.webhead1104.towncraft.platform.TowncraftTaskTestImpl;
+import me.webhead1104.towncraft.platform.test.TowncraftTaskTestImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;

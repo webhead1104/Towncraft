@@ -1,0 +1,159 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2026 Webhead1104
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package me.webhead1104.towncraft.platform.cytosis.inventory;
+
+import lombok.NonNull;
+import me.webhead1104.towncraft.menus.TowncraftInventoryType;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.inventory.TowncraftInventory;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.cytosis.TowncraftPlayerCytosisImpl;
+import me.webhead1104.towncraft.platform.cytosis.item.TowncraftItemStackCytosisImpl;
+import net.cytonic.cytosis.player.CytosisPlayer;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import net.minestom.server.inventory.AbstractInventory;
+import net.minestom.server.inventory.Inventory;
+import net.minestom.server.inventory.PlayerInventory;
+import net.minestom.server.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class TowncraftInventoryCytosisImpl implements TowncraftInventory {
+    private final AbstractInventory inventory;
+
+    public TowncraftInventoryCytosisImpl(AbstractInventory inventory) {
+        this.inventory = inventory;
+    }
+
+    @Override
+    public List<TowncraftPlayer> getViewers() {
+        return inventory.getViewers().stream()
+                .map(CytosisPlayer.class::cast)
+                .map(TowncraftPlayerCytosisImpl::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public int getSize() {
+        return inventory.getSize();
+    }
+
+    @Override
+    public Component getTitle() {
+        if (inventory instanceof PlayerInventory) {
+            throw new UnsupportedOperationException("This operation is not supported.");
+        }
+
+        return ((Inventory) inventory).getTitle();
+    }
+
+    @Override
+    public void setTitle(Component title) {
+        if (inventory instanceof PlayerInventory) {
+            throw new UnsupportedOperationException("This operation is not supported.");
+        }
+
+        ((Inventory) inventory).setTitle(title);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        if (inventory instanceof PlayerInventory) {
+            throw new UnsupportedOperationException("This operation is not supported.");
+        }
+
+        ((Inventory) inventory).setTitle(Component.text(title));
+    }
+
+    @Override
+    public String getTitleString() {
+        if (inventory instanceof PlayerInventory) {
+            throw new UnsupportedOperationException("This operation is not supported.");
+        }
+
+        return PlainTextComponentSerializer.plainText().serialize(((Inventory) inventory).getTitle());
+    }
+
+    @Override
+    public TowncraftInventoryType getType() {
+        if (inventory instanceof PlayerInventory) {
+            return TowncraftInventoryType.PLAYER;
+        }
+        return switch (((Inventory) inventory).getInventoryType()) {
+            case CHEST_1_ROW, CHEST_2_ROW, CHEST_3_ROW, CHEST_4_ROW, CHEST_5_ROW, CHEST_6_ROW ->
+                    TowncraftInventoryType.CHEST;
+            default -> TowncraftInventoryType.valueOf(((Inventory) inventory).getInventoryType().name());
+        };
+    }
+
+    @Override
+    public void setItem(int slot, @NonNull TowncraftItemStack itemStack) {
+        inventory.setItemStack(slot, (ItemStack) itemStack.toPlatform());
+    }
+
+    @Override
+    public TowncraftItemStack getItem(int slot) {
+        return new TowncraftItemStackCytosisImpl(inventory.getItemStack(slot));
+    }
+
+    @Override
+    public @Nullable TowncraftItemStack @NotNull [] getContents() {
+        return Arrays.stream(inventory.getItemStacks())
+                .map(TowncraftItemStackCytosisImpl::new).toArray(TowncraftItemStackCytosisImpl[]::new);
+    }
+
+    @Override
+    public void setContents(@Nullable TowncraftItemStack @NotNull [] items) {
+        ItemStack[] itemStacks = new ItemStack[items.length];
+        int i = 0;
+        for (TowncraftItemStack item : items) {
+            if (item == null) {
+                itemStacks[i++] = null;
+                continue;
+            }
+            itemStacks[i++] = (ItemStack) item.toPlatform();
+        }
+        inventory.copyContents(itemStacks);
+    }
+
+    @Override
+    public void clear() {
+        inventory.clear();
+    }
+
+    @Override
+    public void clear(int slot) {
+        inventory.setItemStack(slot, ItemStack.AIR);
+    }
+
+    @Override
+    public Object getPlatform() {
+        return inventory;
+    }
+}

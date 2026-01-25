@@ -109,7 +109,7 @@ tasks {
     }
     paperPluginYaml {
         name.set("Towncraft")
-        main.set("me.webhead1104.towncraft.TowncraftPaper")
+        main.set("me.webhead1104.towncraft.platform.paper.TowncraftPaper")
         apiVersion.set("1.21")
         author.set("Webhead1104")
         description.set("A remake of the game Township by Playrix in Minecraft")

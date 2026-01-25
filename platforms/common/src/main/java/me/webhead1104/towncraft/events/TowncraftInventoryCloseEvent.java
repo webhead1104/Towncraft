@@ -24,7 +24,7 @@
 package me.webhead1104.towncraft.events;
 
 import lombok.Getter;
-import me.webhead1104.towncraft.platform.inventory.TowncraftInventoryView;
+import me.webhead1104.towncraft.platform.common.inventory.TowncraftInventoryView;
 
 @Getter
 public class TowncraftInventoryCloseEvent extends TowncraftInventoryEvent {

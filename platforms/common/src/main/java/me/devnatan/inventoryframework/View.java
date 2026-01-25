@@ -36,7 +36,7 @@ import me.webhead1104.towncraft.menus.pipeline.CancelledCloseInterceptor;
 import me.webhead1104.towncraft.menus.pipeline.GlobalClickInterceptor;
 import me.webhead1104.towncraft.menus.pipeline.ItemClickInterceptor;
 import me.webhead1104.towncraft.menus.pipeline.ItemCloseOnClickInterceptor;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
 import org.jetbrains.annotations.ApiStatus;
 
 /**

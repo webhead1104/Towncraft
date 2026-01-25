@@ -28,9 +28,9 @@ import me.devnatan.inventoryframework.context.RenderContext;
 import me.webhead1104.towncraft.TowncraftPlatformManager;
 import me.webhead1104.towncraft.menus.TowncraftView;
 import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.platform.TowncraftPlayer;
-import me.webhead1104.towncraft.platform.item.TowncraftItemStack;
-import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.common.TowncraftPlayer;
+import me.webhead1104.towncraft.platform.common.item.TowncraftItemStack;
+import me.webhead1104.towncraft.platform.common.item.TowncraftMaterial;
 import me.webhead1104.towncraft.utils.Msg;
 import org.jetbrains.annotations.NotNull;
 

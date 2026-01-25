@@ -23,7 +23,7 @@
  */
 package me.webhead1104.towncraft.impl.items;
 
-import me.webhead1104.towncraft.platform.item.TowncraftMaterialTestImpl;
+import me.webhead1104.towncraft.platform.test.item.TowncraftMaterialTestImpl;
 import net.kyori.adventure.key.Key;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

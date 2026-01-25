@@ -25,7 +25,7 @@ package me.webhead1104.towncraft.tiles;
 
 import lombok.extern.slf4j.Slf4j;
 import me.webhead1104.towncraft.Towncraft;
-import me.webhead1104.towncraft.platform.item.TowncraftMaterial;
+import me.webhead1104.towncraft.platform.common.item.TowncraftMaterial;
 import me.webhead1104.towncraft.serializers.MaterialSerializer;
 import me.webhead1104.towncraft.serializers.TileSerializer;
 import org.junit.jupiter.api.Test;
