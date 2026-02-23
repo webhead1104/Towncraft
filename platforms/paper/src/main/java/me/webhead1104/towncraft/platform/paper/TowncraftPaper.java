@@ -38,6 +38,7 @@ import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 
 public class TowncraftPaper extends JavaPlugin implements Listener {
     @Getter
+    @SuppressWarnings("NotNullFieldNotInitialized")
     private static TowncraftPaper instance;
 
     @Override

@@ -23,7 +23,6 @@
  */
 package me.webhead1104.towncraft.menus;
 
-import com.google.common.collect.Sets;
 import lombok.Getter;
 import me.devnatan.inventoryframework.ViewContainer;
 import me.devnatan.inventoryframework.ViewType;
@@ -38,10 +37,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
 
 public final class TowncraftViewContainer implements ViewContainer {
-    private static final Set<String> UNOPENABLES = Sets.newHashSet("CRAFTING", "CREATIVE", "PLAYER");
     @Getter
     private final TowncraftInventory inventory;
     @Getter
