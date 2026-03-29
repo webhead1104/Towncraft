@@ -1,9 +1,9 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 
 plugins {
-    id("io.freefair.lombok") version "9.2.0" apply false
-    id("net.kyori.indra.git") version "4.0.0" apply false
-    id("net.kyori.indra.licenser.spotless") version "4.0.0" apply false
+    alias(libs.plugins.lombok) apply false
+    alias(libs.plugins.indra.git) apply false
+    alias(libs.plugins.indra.licenser) apply false
 }
 
 subprojects {

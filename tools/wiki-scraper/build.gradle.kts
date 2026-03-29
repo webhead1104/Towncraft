@@ -1,6 +1,6 @@
 plugins {
-    id("io.freefair.lombok") version "9.2.0"
-    id("com.gradleup.shadow") version "9.4.1"
+    alias(libs.plugins.lombok)
+    alias(libs.plugins.shadow)
     kotlin("jvm") version "2.3.20"
     application
 }

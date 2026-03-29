@@ -4,7 +4,7 @@ import org.eclipse.jgit.api.Git
 plugins {
     id("java")
     id("java-library")
-    id("net.kyori.blossom") version "2.2.0"
+    alias(libs.plugins.blossom)
 }
 
 version = project.findProperty("plugin_version") as String? ?: "unknown"
@@ -45,7 +45,7 @@ abstract class RepositoryUrlValueSource : RepositoryValueSource.Parameterless<St
 
 val gitBranch: Provider<String> = indraGit.branchName().orElse("DEV")
 
-val gitCommitAbbrev: Provider<String> = indraGit.commit().map { it?.name?.substring(0, 7) ?: "0".repeat(7) }
+val gitCommitAbbrev: Provider<String> = indraGit.commit().map { it.name?.substring(0, 7) ?: "0".repeat(7) }
 
 val gitVersion: Provider<String> = gitBranch.zip(gitCommitAbbrev) { branch, commit ->
     "git-${branch}-${commit}"

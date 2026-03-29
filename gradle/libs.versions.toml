@@ -21,6 +21,10 @@ jsoup = "1.22.1"
 clikt = "5.1.0"
 kotlin-logging = "8.0.01"
 autoService = "1.1.1"
+lombok = "9.2.0"
+indra = "4.0.0"
+blossom = "2.2.0"
+shadow = "9.4.1"
 
 [libraries]
 inventoryFramework-api = { module = "me.devnatan:inventory-framework-api", version.ref = "inventoryFramework" }
@@ -53,3 +57,10 @@ clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 kotlin-logging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "kotlin-logging" }
 autoService-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
 autoService-processor = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
+
+[plugins]
+lombok = { id = "io.freefair.lombok", version.ref = "lombok" }
+indra-git = { id = "net.kyori.indra.git", version.ref = "indra" }
+indra-licenser = { id = "net.kyori.indra.licenser.spotless", version.ref = "indra" }
+blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
