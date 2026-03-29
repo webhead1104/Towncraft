@@ -42,6 +42,6 @@ public class MenuFactory {
     }
 
     private static TowncraftInventoryType toInventoryType(ViewType type) {
-        return TowncraftInventoryType.valueOf(type.getIdentifier().replaceAll("-", "_").toUpperCase());
+        return TowncraftInventoryType.valueOf(type.getIdentifier().replace("-", "_").toUpperCase());
     }
 }

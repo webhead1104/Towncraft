@@ -90,7 +90,7 @@ public class BuildMenuType implements DataLoader.KeyBasedDataLoader<BuildMenuTyp
 
         @PostProcess
         private void postProcess() {
-            menuTitle = Msg.format(WordUtils.capitalizeFully(key.value().replaceAll("_", " ")));
+            menuTitle = Msg.format(WordUtils.capitalizeFully(key.value().replace("_", " ")));
             buildings = new ArrayList<>(realBuildings.stream().map(Towncraft.getDataLoader(BuildingType.class)::get).map(List::getFirst)
                     .filter(it -> !it.isNotInMenu()).map(BuildingType.Building::getKey).toList());
         }

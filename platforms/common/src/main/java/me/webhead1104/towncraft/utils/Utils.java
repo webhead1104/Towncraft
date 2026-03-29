@@ -42,7 +42,7 @@ public class Utils {
     private static final Random RANDOM = new Random();
 
     public static String thing2(String string) {
-        return StringUtils.capitalize(string.replaceAll("_", " ").toLowerCase());
+        return StringUtils.capitalize(string.replace("_", " ").toLowerCase());
     }
 
     public static String format(Instant instant1, Instant instant2) {
