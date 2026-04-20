@@ -1,75 +1,64 @@
-import com.diffplug.gradle.spotless.SpotlessExtension
+import net.kyori.indra.git.RepositoryValueSource
+import org.eclipse.jgit.api.Git
 
 plugins {
-    alias(libs.plugins.lombok) apply false
-    alias(libs.plugins.indra.git) apply false
-    alias(libs.plugins.indra.licenser) apply false
+    java
+    alias(libs.plugins.lombok)
+    alias(libs.plugins.indra.git)
+    alias(libs.plugins.blossom)
 }
 
-subprojects {
-    if (subprojects.isNotEmpty()) {
-        return@subprojects
+repositories {
+    mavenCentral()
+    maven("https://repo.opencollab.dev/maven-snapshots")
+    maven("https://jitpack.io/")
+    maven("https://repo.foxikle.dev/cytonic")
+}
+
+dependencies {
+    implementation(libs.inventoryFramework.api)
+    implementation(libs.inventoryFramework.platform)
+    compileOnly(libs.cytosis) {
+        exclude("me.devnatan")
+        exclude("net.cytonic.minestomInventoryFramework")
     }
-    apply(plugin = "java")
-    apply(plugin = "io.freefair.lombok")
-    apply(plugin = "jacoco")
-    apply(plugin = "net.kyori.indra.git")
-    apply(plugin = "net.kyori.indra.licenser.spotless")
+    implementation(libs.configurate.yaml)
+    implementation(libs.mongodb)
+    implementation(libs.lamp.common)
+    implementation(libs.lamp.minestom)
+    implementation(libs.commonsText)
 
-    repositories {
-        mavenCentral()
-        maven("https://repo.opencollab.dev/maven-snapshots")
-        maven("https://jitpack.io/")
+}
+
+tasks.withType<JavaCompile> {
+    // Preserve parameter names in the bytecode
+    options.compilerArgs.add("-parameters")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+}
+
+abstract class RepositoryUrlValueSource : RepositoryValueSource.Parameterless<String>() {
+    override fun obtain(repository: Git): String? {
+        return repository.repository.config.getString("remote", "origin", "url")
     }
+}
 
-    configure<SpotlessExtension> {
-        java {
-            targetExclude("**/build/**")
-        }
-    }
+val gitBranch: Provider<String> = indraGit.branchName().orElse("DEV")
 
-    tasks.withType<JavaCompile> {
-        // Preserve parameter names in the bytecode
-        options.compilerArgs.add("-parameters")
-    }
+val gitCommitAbbrev: Provider<String> = indraGit.commit().map { it.name?.substring(0, 7) ?: "0".repeat(7) }
 
-    tasks.withType<Jar> {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    }
+val gitVersion: Provider<String> = gitBranch.zip(gitCommitAbbrev) { branch, commit ->
+    "git-${branch}-${commit}"
+}
 
-    plugins.withType<JavaPlugin> {
-        tasks.withType<Test> {
-            finalizedBy(tasks.named("jacocoTestReport"))
-
-            useJUnitPlatform()
-            maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
-            reports {
-                junitXml.required.set(true)
-                html.required.set(true)
+sourceSets {
+    main {
+        blossom {
+            javaSources {
+                property("version", "${project.version} (${gitVersion.get()})")
             }
-        }
-
-        tasks.named<JacocoReport>("jacocoTestReport") {
-            dependsOn(tasks.named("test"))
-
-            reports {
-                xml.required.set(true)
-                html.required.set(true)
-                csv.required.set(false)
-            }
-
-            // Ensure the report is generated even if there are no tests yet
-            classDirectories.setFrom(
-                files(classDirectories.files.map {
-                    fileTree(it) {
-                        exclude(
-                            // Exclude generated code, data classes, etc.
-                            "**/BuildConfig.*",
-                            "**/*$*.*",  // Inner classes
-                        )
-                    }
-                })
-            )
         }
     }
 }
