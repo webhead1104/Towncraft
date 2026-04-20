@@ -14,7 +14,6 @@ logback = "1.5.32"
 junit = "6.0.3"
 zapper = "1.0.3"
 cytosis = "0.3.2-SNAPSHOT"
-bstats = "3.2.1"
 javapoet = "0.14.0"
 gson = "2.13.2"
 jsoup = "1.22.2"
@@ -39,14 +38,12 @@ slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 mongodb = { module = "org.mongodb:mongodb-driver-sync", version.ref = "mongodb" }
 hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 lamp-common = { module = "io.github.revxrsal:lamp.common", version.ref = "lamp" }
-lamp-bukkit = { module = "io.github.revxrsal:lamp.bukkit", version.ref = "lamp" }
 lamp-minestom = { module = "io.github.revxrsal:lamp.minestom", version.ref = "lamp" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 junit-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 zapper = { module = "io.github.revxrsal:zapper.api", version.ref = "zapper" }
 cytosis = { module = "net.cytonic:Cytosis", version.ref = "cytosis" }
-bstats = { module = "org.bstats:bstats-bukkit", version.ref = "bstats" }
 adventure-api = { module = "net.kyori:adventure-api", version.ref = "adventure" }
 adventure-minimessage = { module = "net.kyori:adventure-text-minimessage", version.ref = "adventure" }
 adventure-plainText = { module = "net.kyori:adventure-text-serializer-plain", version.ref = "adventure" }

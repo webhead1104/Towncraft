@@ -63,10 +63,6 @@ component_management:
       name: Cytosis Platform
       paths:
         - platforms/cytosis/src/main/java/**
-    - component_id: paper
-      name: Paper Platform
-      paths:
-        - platforms/paper/src/main/java/**
     - component_id: common
       name: Common Code
       paths:

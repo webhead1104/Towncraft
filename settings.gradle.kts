@@ -14,6 +14,5 @@ plugins {
 include("tools:wiki-scraper")
 include(":platforms:common")
 include(":platforms:cytosis")
-include(":platforms:paper")
 include(":code-generators")
 include(":platforms:common-test")
