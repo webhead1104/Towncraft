@@ -26,7 +26,6 @@ dependencies {
     implApi(libs.lamp.common)
     implApi(libs.autoService.annotations)
 
-    testImplementation(project(":platforms:common-test"))
     testImplementation(libs.logback)
     testAnnotationProcessor(libs.autoService.processor)
     testImplementation(libs.junit.jupiter)
