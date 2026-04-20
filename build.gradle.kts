@@ -16,8 +16,6 @@ subprojects {
     apply(plugin = "net.kyori.indra.git")
     apply(plugin = "net.kyori.indra.licenser.spotless")
 
-    group = "me.webhead1104"
-
     repositories {
         mavenCentral()
         maven("https://repo.opencollab.dev/maven-snapshots")
