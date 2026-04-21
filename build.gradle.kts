@@ -27,7 +27,7 @@ dependencies {
     implementation(libs.lamp.common)
     implementation(libs.lamp.minestom)
     implementation(libs.commonsText)
-
+    implementation(libs.classgraph)
 }
 
 tasks.withType<JavaCompile> {
