@@ -23,8 +23,10 @@
  */
 package me.webhead1104.towncraft;
 
+import com.google.common.base.Stopwatch;
 import lombok.Getter;
 import lombok.Setter;
+import me.webhead1104.towncraft.database.LoaderManager;
 import org.spongepowered.configurate.loader.HeaderMode;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
@@ -33,12 +35,12 @@ import org.spongepowered.configurate.yaml.NodeStyle;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 @ConfigSerializable
 @Getter
 @Setter
 public class Config {
-    private static final File OLD_PLUGIN_DIR = new File("plugins", "Township");
     private static final File CONFIG_FILE = new File("config.yml");
     @Setting("version")
     private final int version = 1;
@@ -56,35 +58,29 @@ public class Config {
     }
 
     public static void loadConfig() {
-        //todo
-//        try {
-//            Stopwatch stopwatch = Stopwatch.createStarted();
-//            if (OLD_PLUGIN_DIR.exists()) {
-//                if (!OLD_PLUGIN_DIR.renameTo(platform.getDataFolder())) {
-//                    platform.getLogger().error("Could not rename config file!");
-//                }
-//            }
-//
-//            YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-//                    .file(CONFIG_FILE)
-//                    .commentsEnabled(true)
-//                    .nodeStyle(NodeStyle.BLOCK)
-//                    .headerMode(HeaderMode.PRESERVE)
-//                    .build();
-//
-//            if (!CONFIG_FILE.exists()) {
-//                TowncraftPlatformManager.setConfig(new Config());
-//                saveConfig();
-//                platform.getLogger().info("Created new config file");
-//            }
-//
-//            TowncraftPlatformManager.setConfig(loader.load().get(Config.class));
-//
-//            TowncraftPlatformManager.setLoaderManager(new LoaderManager());
-//            platform.getLogger().info("Loaded config in {} ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
-//        } catch (Exception e) {
-//            platform.getLogger().error("Could not load config!", e);
-//        }
+        try {
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
+            YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
+                    .file(CONFIG_FILE)
+                    .commentsEnabled(true)
+                    .nodeStyle(NodeStyle.BLOCK)
+                    .headerMode(HeaderMode.PRESERVE)
+                    .build();
+
+            if (!CONFIG_FILE.exists()) {
+                TowncraftPlatformManager.setConfig(new Config());
+                saveConfig();
+                Towncraft.getLogger().info("Created new config file");
+            }
+
+            TowncraftPlatformManager.setConfig(loader.load().get(Config.class));
+
+            TowncraftPlatformManager.setLoaderManager(new LoaderManager());
+            Towncraft.getLogger().info("Loaded config in {} ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        } catch (Exception e) {
+            Towncraft.getLogger().error("Could not load config!", e);
+        }
     }
 
     public enum DatabaseType {

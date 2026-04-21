@@ -27,9 +27,13 @@ import lombok.experimental.UtilityClass;
 import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.data.TileSize;
 import me.webhead1104.towncraft.data.objects.WorldSection;
+import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.tiles.BuildingTile;
 import me.webhead1104.towncraft.tiles.Tile;
+import me.webhead1104.towncraft.utils.Msg;
+import net.minestom.server.item.ItemStack;
+import net.minestom.server.item.Material;
 
 @UtilityClass
 public class WorldUtils {
@@ -75,38 +79,37 @@ public class WorldUtils {
     }
 
     public static void applyArrows(TowncraftPlayer player, int section) {
-        //todo
-//        if (canMoveRight(section)) {
-//            TowncraftItemStack itemStack = TowncraftItemStack.of(TowncraftMaterial.ARROW);
-//            itemStack.setName(Msg.format("<dark_green>Click to scroll right!"));
-//            player.getInventory().setItem(23, itemStack);
-//        } else {
-//            player.getInventory().clear(23);
-//        }
-//
-//        if (canMoveDown(section)) {
-//            TowncraftItemStack itemStack = TowncraftItemStack.of(TowncraftMaterial.ARROW);
-//            itemStack.setName(Msg.format("<dark_green>Click to scroll down!"));
-//            player.getInventory().setItem(31, itemStack);
-//        } else {
-//            player.getInventory().clear(31);
-//        }
-//
-//        if (canMoveLeft(section)) {
-//            TowncraftItemStack itemStack = TowncraftItemStack.of(TowncraftMaterial.ARROW);
-//            itemStack.setName(Msg.format("<dark_green>Click to scroll left!"));
-//            player.getInventory().setItem(21, itemStack);
-//        } else {
-//            player.getInventory().clear(21);
-//        }
-//
-//        if (canMoveUp(section)) {
-//            TowncraftItemStack itemStack = TowncraftItemStack.of(TowncraftMaterial.ARROW);
-//            itemStack.setName(Msg.format("<dark_green>Click to scroll up!"));
-//            player.getInventory().setItem(13, itemStack);
-//        } else {
-//            player.getInventory().clear(13);
-//        }
+        if (canMoveRight(section)) {
+            TowncraftItemStack itemStack = TowncraftItemStack.of(Material.ARROW);
+            itemStack.setName(Msg.format("<dark_green>Click to scroll right!"));
+            player.getInventory().setItemStack(23, itemStack.build());
+        } else {
+            player.getInventory().setItemStack(23, ItemStack.AIR);
+        }
+
+        if (canMoveDown(section)) {
+            TowncraftItemStack itemStack = TowncraftItemStack.of(Material.ARROW);
+            itemStack.setName(Msg.format("<dark_green>Click to scroll down!"));
+            player.getInventory().setItemStack(31, itemStack.build());
+        } else {
+            player.getInventory().setItemStack(31, ItemStack.AIR);
+        }
+
+        if (canMoveLeft(section)) {
+            TowncraftItemStack itemStack = TowncraftItemStack.of(Material.ARROW);
+            itemStack.setName(Msg.format("<dark_green>Click to scroll left!"));
+            player.getInventory().setItemStack(21, itemStack.build());
+        } else {
+            player.getInventory().setItemStack(21, ItemStack.AIR);
+        }
+
+        if (canMoveUp(section)) {
+            TowncraftItemStack itemStack = TowncraftItemStack.of(Material.ARROW);
+            itemStack.setName(Msg.format("<dark_green>Click to scroll up!"));
+            player.getInventory().setItemStack(13, itemStack.build());
+        } else {
+            player.getInventory().setItemStack(13, ItemStack.AIR);
+        }
     }
 
     public static boolean canPlace(int startSlot, TileSize tileSize) {

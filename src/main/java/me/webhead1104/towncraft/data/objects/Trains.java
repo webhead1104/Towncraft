@@ -30,6 +30,7 @@ import lombok.Setter;
 import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.dataLoaders.ItemType;
 import net.kyori.adventure.key.Key;
+import org.apache.commons.lang3.Validate;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
 import java.util.*;
@@ -77,7 +78,7 @@ public class Trains {
         }
 
         public TrainCar getTrainCar(int car) {
-//todo            Validate.inclusiveBetween(1, 5, car);
+            Validate.inclusiveBetween(1, 5, car);
             return trainCars.get(car);
         }
 
