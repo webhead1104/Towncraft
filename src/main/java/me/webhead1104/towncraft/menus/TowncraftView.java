@@ -29,24 +29,34 @@ import me.devnatan.inventoryframework.context.OpenContext;
 import me.devnatan.inventoryframework.state.MutableState;
 import me.devnatan.inventoryframework.state.State;
 import me.webhead1104.towncraft.Towncraft;
+import me.webhead1104.towncraft.TowncraftPlatformManager;
 import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.features.world.WorldMenu;
-import me.webhead1104.towncraft.menus.context.CloseContext;
-import me.webhead1104.towncraft.menus.context.Context;
+import net.cytonic.minestomInventoryFramework.context.CloseContext;
+import net.cytonic.minestomInventoryFramework.context.Context;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import org.jetbrains.annotations.NotNull;
 
 @NoArgsConstructor
 public class TowncraftView extends View {
     protected final MutableState<Boolean> openBackMenu = mutableState(true);
-    protected final State<User> userState = computedState(Context::getUser);
+    protected final State<User> userState = computedState(TowncraftView::getUser);
     protected MutableState<Class<? extends View>> closeClass = mutableState(WorldMenu.class);
-    protected State<Object> initialData = computedState(context -> context.getUser().getSection());
+    protected State<Object> initialData = computedState(context -> getUser(context).getSection());
 
     public TowncraftView(Class<? extends View> closeClass) {
         this.closeClass = mutableState(closeClass);
         if (!closeClass.equals(WorldMenu.class)) {
             initialData = null;
         }
+    }
+
+    public static User getUser(Context context) {
+        return TowncraftPlatformManager.getUserManager().getUser(context.getId());
+    }
+
+    public static boolean itemExists(SlotClickContext context) {
+        return !context.getItem().isAir();
     }
 
     @Override

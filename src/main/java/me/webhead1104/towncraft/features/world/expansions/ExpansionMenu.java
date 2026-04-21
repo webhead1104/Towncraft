@@ -31,12 +31,12 @@ import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.data.TileSize;
 import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.tiles.ExpansionTile;
 import me.webhead1104.towncraft.utils.Msg;
 import me.webhead1104.towncraft.utils.Utils;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,7 +62,7 @@ public class ExpansionMenu extends TowncraftView {
 
         user.getWorld().getSection(user.getSection()).getSlotMap().forEach((key, tile) -> {
             if (!TileSize.SIZE_3X3.toList(slotState.get(context)).contains(key)) {
-                context.slot(key).onRender(slotRenderContext -> slotRenderContext.setItem(tile.render(slotRenderContext, user.getWorld().getSection(user.getSection()), key)));
+                context.slot(key).onRender(slotRenderContext -> slotRenderContext.setItem(tile.render(slotRenderContext, user.getWorld().getSection(user.getSection()), key).build()));
             }
         });
         for (Integer slot : TileSize.SIZE_3X3.toList(slotState.get(context))) {
@@ -72,11 +72,11 @@ public class ExpansionMenu extends TowncraftView {
                     itemStack = TowncraftItemStack.of(Material.LIME_CONCRETE);
                 }
                 itemStack.setName(Msg.format("Expansion"));
-                slotRenderContext.setItem(itemStack);
+                slotRenderContext.setItem(itemStack.build());
             });
         }
 
-        TowncraftPlayer player = context.getPlayer();
+        TowncraftPlayer player = (TowncraftPlayer) context.getPlayer();
         TowncraftItemStack itemStack;
         if (user.getPopulation() >= expansion.getPopulationNeeded() && user.getCoins() >= expansion.getCoinsNeeded()) {
             itemStack = TowncraftItemStack.of(Material.LIME_CONCRETE);
@@ -98,7 +98,7 @@ public class ExpansionMenu extends TowncraftView {
     @Override
     public void onClick(@NotNull SlotClickContext context) {
         if (!context.isOnEntityContainer()) return;
-        if (context.getSlot() == 85 && context.itemExists() && context.getItem().material() == Material.LIME_CONCRETE) {
+        if (context.getSlot() == 85 && itemExists(context) && context.getItem().material() == Material.LIME_CONCRETE) {
             User user = userState.get(context);
             ExpansionDataLoader.Expansion expansion = expansionState.get(context);
             if (user.getCoins() >= expansion.getCoinsNeeded() && user.getPopulation() >= expansion.getPopulationNeeded()) {

@@ -48,7 +48,7 @@ public class BuildMenu extends TowncraftView {
                 TowncraftItemStack itemStack = TowncraftItemStack.of(Material.PLAYER_HEAD);
                 itemStack.setName(buildMenu.getMenuTitle());
                 itemStack.overrideNameColor();
-                slotRenderContext.setItem(itemStack);
+                slotRenderContext.setItem(itemStack.build());
             }).onClick(slotClickContext -> {
                 slotClickContext.openForPlayer(BuildMenuSelectBuildingMenu.class, buildMenu.key());
                 openBackMenu.set(false, slotClickContext);

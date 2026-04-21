@@ -4,14 +4,14 @@ import me.webhead1104.towncraft.TowncraftPlatformManager;
 import me.webhead1104.towncraft.data.objects.User;
 import net.cytonic.cytosis.player.CytosisPlayer;
 import net.minestom.server.item.ItemStack;
+import net.minestom.server.network.player.GameProfile;
 import net.minestom.server.network.player.PlayerConnection;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
-
 public class TowncraftPlayer extends CytosisPlayer {
-    public TowncraftPlayer(@NotNull UUID uuid, @NotNull String username, @NotNull PlayerConnection playerConnection) {
-        super(uuid, username, playerConnection);
+
+    public TowncraftPlayer(@NotNull PlayerConnection playerConnection, GameProfile gameProfile) {
+        super(playerConnection, gameProfile);
     }
 
     public User getUser() {

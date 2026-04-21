@@ -73,7 +73,7 @@ public class FactoryMenu extends TowncraftView {
             context.slot(recipeSlot++).onRender(slotRenderContext -> {
                 TowncraftItemStack stack = recipe.getResult().getItemStack();
                 stack.setLore(calculateLore(recipe, user.getBarn()));
-                slotRenderContext.setItem(stack);
+                slotRenderContext.setItem(stack.build());
             }).updateOnClick().onClick(_ -> {
                 if (!factory.canAddWaitingOrWorkingOn() || !recipe.hasRequiredItems(user.getBarn())) return;
                 recipe.getIngredients().forEach((item, value) -> user.getBarn().removeAmountFromItem(item.key(), value));
@@ -95,12 +95,12 @@ public class FactoryMenu extends TowncraftView {
                     TowncraftItemStack stack = TowncraftItemStack.of(Material.HOPPER);
                     stack.setName(Msg.format("<red>Nothing is being made right now"));
                     stack.setLore(Msg.format("<grey>Maybe you should make something!"));
-                    slotRenderContext.setItem(stack);
+                    slotRenderContext.setItem(stack.build());
                     return;
                 }
                 TowncraftItemStack stack = factory.getWaiting(finalI).getResult().getItemStack();
                 stack.setLore(Msg.format("<dark_green>Waiting..."));
-                slotRenderContext.setItem(stack);
+                slotRenderContext.setItem(stack.build());
             });
         }
 
@@ -122,18 +122,18 @@ public class FactoryMenu extends TowncraftView {
                 TowncraftItemStack stack = TowncraftItemStack.of(Material.RED_CANDLE);
                 stack.setName(Msg.format("<red>Nothing is being made right now"));
                 stack.setLore(Msg.format("<grey>Maybe you should make something!"));
-                slotRenderContext.setItem(stack);
+                slotRenderContext.setItem(stack.build());
                 return;
             }
             if (factory.getInstant().equals(Instant.EPOCH)) {
                 TowncraftItemStack stack = factory.getWorkingOn().getResult().getItemStack();
                 stack.setLore(Msg.format("<red>Your production queue is full!"));
-                slotRenderContext.setItem(stack);
+                slotRenderContext.setItem(stack.build());
                 return;
             }
             TowncraftItemStack stack = factory.getWorkingOn().getResult().getItemStack();
             stack.setLore(Msg.format("<gold>Time: %s", Utils.format(Instant.now(), factory.getInstant())));
-            slotRenderContext.setItem(stack);
+            slotRenderContext.setItem(stack.build());
         });
 
         int completedSlot = 12;
@@ -145,12 +145,12 @@ public class FactoryMenu extends TowncraftView {
                     TowncraftItemStack stack = TowncraftItemStack.of(Material.CHEST);
                     stack.setName(Msg.format("<red>Nothing is being made right now"));
                     stack.setLore(Msg.format("<grey>Maybe you should make something!"));
-                    slotRenderContext.setItem(stack);
+                    slotRenderContext.setItem(stack.build());
                     return;
                 }
                 TowncraftItemStack stack = recipe.getResult().getItemStack();
                 stack.setLore(Msg.format("<green>Click to claim!"));
-                slotRenderContext.setItem(stack);
+                slotRenderContext.setItem(stack.build());
             }).onClick(_ -> {
                 if (factory.getCompleted(finalI).equals(Towncraft.NONE_KEY)) return;
                 user.getBarn().addAmountToItem(factory.getCompleted(finalI).key(), 1);

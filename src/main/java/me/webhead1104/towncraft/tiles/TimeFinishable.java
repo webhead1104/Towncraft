@@ -24,7 +24,7 @@
 package me.webhead1104.towncraft.tiles;
 
 import me.webhead1104.towncraft.data.objects.WorldSection;
-import me.webhead1104.towncraft.menus.context.Context;
+import net.cytonic.minestomInventoryFramework.context.Context;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Instant;

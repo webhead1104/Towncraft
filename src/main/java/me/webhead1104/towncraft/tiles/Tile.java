@@ -26,14 +26,15 @@ package me.webhead1104.towncraft.tiles;
 import me.devnatan.inventoryframework.context.RenderContext;
 import me.devnatan.inventoryframework.context.SlotContext;
 import me.webhead1104.towncraft.data.objects.WorldSection;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import org.jetbrains.annotations.ApiStatus;
 
 public abstract class Tile {
     public abstract TowncraftItemStack render(SlotRenderContext context, WorldSection worldSection, int slot);
 
+    //todo: maybe add user to these?
     public boolean onClick(SlotClickContext context, WorldSection worldSection, int slot) {
         return false;
     }

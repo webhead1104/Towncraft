@@ -29,12 +29,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.world.expansions.ExpansionMenu;
-import me.webhead1104.towncraft.menus.context.Context;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
 import me.webhead1104.towncraft.utils.Utils;
+import net.cytonic.minestomInventoryFramework.context.Context;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.Nullable;
 

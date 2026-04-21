@@ -27,10 +27,10 @@ import com.google.errorprone.annotations.Keep;
 import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.world.helicopter.HelicopterView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.minestom.server.item.Material;
 
 public class HelicopterTile extends BuildingTile {

@@ -74,14 +74,14 @@ public class TrainMenu extends TowncraftView {
                 if (!train.isUnlocked()) {
                     itemStack.setMaterial(Material.COARSE_DIRT);
                     itemStack.setName(Msg.format("<red>Not unlocked"));
-                    slotRenderContext.setItem(itemStack);
+                    slotRenderContext.setItem(itemStack.build());
                     return;
                 }
                 if (!train.isInStation()) {
                     itemStack.setMaterial(Material.YELLOW_CONCRETE);
                     itemStack.setName(Msg.format("<white>Train: %d", finalI));
                     itemStack.setLore(List.of(Msg.format("<white>Gone shopping"), Msg.format("<white>Be back in a bit")));
-                    slotRenderContext.setItem(itemStack);
+                    slotRenderContext.setItem(itemStack.build());
                     return;
                 }
                 if (train.isClaimItems()) {
@@ -89,7 +89,7 @@ public class TrainMenu extends TowncraftView {
                 } else {
                     itemStack.setName(Msg.format("<green>Click the train cars to give items to the train!"));
                 }
-                slotRenderContext.setItem(itemStack);
+                slotRenderContext.setItem(itemStack.build());
             });
 
             int carSlot = trainSlot + 1;
@@ -103,19 +103,19 @@ public class TrainMenu extends TowncraftView {
                         if (car.getClaimItemType().equals(Towncraft.NONE_KEY)) {
                             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.IRON_INGOT);
                             itemStack.setName(Msg.format("<green>Item claimed!"));
-                            slotRenderContext.setItem(itemStack);
+                            slotRenderContext.setItem(itemStack.build());
                             return;
                         }
                         TowncraftItemStack itemStack = TowncraftItemStack.of(Material.CHEST);
                         itemStack.setName(Msg.format(Utils.thing2(car.getClaimItemType().value())));
                         itemStack.setLore(Msg.format("<white>%d", car.getClaimItemAmount()));
-                        slotRenderContext.setItem(itemStack);
+                        slotRenderContext.setItem(itemStack.build());
                         return;
                     }
                     if (car.getGiveItemType().equals(Towncraft.NONE_KEY)) {
                         TowncraftItemStack itemStack = TowncraftItemStack.of(Material.IRON_INGOT);
                         itemStack.setName(Msg.format("<green>Items gave!"));
-                        slotRenderContext.setItem(itemStack);
+                        slotRenderContext.setItem(itemStack.build());
                         return;
                     }
 
@@ -126,7 +126,7 @@ public class TrainMenu extends TowncraftView {
                     } else {
                         itemStack.setLore(Msg.format("<red>%d/%d", user.getBarn().getItem(car.getGiveItemType()), car.getGiveItemAmount()));
                     }
-                    slotRenderContext.setItem(itemStack);
+                    slotRenderContext.setItem(itemStack.build());
                 }).onClick(slotClickContext -> {
                     Trains.Train train = trains.getTrain(finalI);
                     Trains.Train.TrainCar trainCar = trains.getTrain(finalI).getTrainCar(finalJ);

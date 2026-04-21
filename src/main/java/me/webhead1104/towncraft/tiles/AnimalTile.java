@@ -29,10 +29,10 @@ import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.animals.AnimalMenu;
 import me.webhead1104.towncraft.features.animals.AnimalType;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.kyori.adventure.key.Key;
 import net.minestom.server.item.Material;
 

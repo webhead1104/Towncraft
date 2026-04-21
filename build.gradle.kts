@@ -6,7 +6,11 @@ plugins {
     alias(libs.plugins.lombok)
     alias(libs.plugins.indra.git)
     alias(libs.plugins.blossom)
+    id("net.cytonic.run-cytosis") version "1.0"
+    alias(libs.plugins.shadow)
 }
+
+version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -16,12 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.inventoryFramework.api)
-    implementation(libs.inventoryFramework.platform)
-    compileOnly(libs.cytosis) {
-        exclude("me.devnatan")
-        exclude("net.cytonic.minestomInventoryFramework")
-    }
+    compileOnly(libs.cytosis)
     implementation(libs.configurate.yaml)
     implementation(libs.mongodb)
     implementation(libs.lamp.common)
@@ -51,6 +50,18 @@ val gitCommitAbbrev: Provider<String> = indraGit.commit().map { it.name?.substri
 
 val gitVersion: Provider<String> = gitBranch.zip(gitCommitAbbrev) { branch, commit ->
     "git-${branch}-${commit}"
+}
+
+tasks {
+    runCytosis {
+        cytosisVersion(libs.versions.cytosis.get())
+        runDirectory.set(rootProject.layout.projectDirectory.dir("run/cytosis"))
+    }
+    shadowJar {
+        archiveFileName.set("Towncraft-${project.version}.jar")
+        archiveClassifier.set("")
+        mergeServiceFiles()
+    }
 }
 
 sourceSets {

@@ -33,10 +33,10 @@ import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.features.world.PlaceMenu;
 import me.webhead1104.towncraft.features.world.WorldMenu;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.tiles.ConstructionTile;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.kyori.adventure.key.Key;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
@@ -46,20 +46,20 @@ public class BuildMenuSelectBuildingMenu extends TowncraftView {
     private final State<BuildMenuType.BuildMenu> typeState = computedState(context -> Towncraft.getDataLoader(BuildMenuType.class).get(keyState.get(context)));
     private final State<Pagination> paginationState = buildComputedPaginationState(context ->
             typeState.get(context).getBuildings()).elementFactory((context, builder, _, buildingType) -> {
-        BuildingType.Building building = context.getUser().getPurchasedBuildings().getNextBuilding(buildingType);
+        BuildingType.Building building = getUser(context).getPurchasedBuildings().getNextBuilding(buildingType);
         if (building == null) {
             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.BARRIER);
             itemStack.setName(Msg.format("<red>You have purchased the max amount of this building!"));
-            builder.withItem(itemStack);
+            builder.withItem(itemStack.build());
             return;
         }
 
         TowncraftItemStack itemStack = building.getItemStack(userState.get(context));
-        builder.withItem(itemStack);
+        builder.withItem(itemStack.build());
         builder.onClick(slotClickContext -> {
             if (building.isNeedToBePlaced()) {
                 BuildMenuType.BuildMenu type = typeState.get(slotClickContext);
-                int startSection = slotClickContext.getUser().getSection();
+                int startSection = getUser(slotClickContext).getSection();
                 slotClickContext.openForPlayer(PlaceMenu.class, ImmutableMap.of(
                         "TILE_SIZE", building.getSize(),
                         "START_SECTION", startSection,
@@ -100,7 +100,7 @@ public class BuildMenuSelectBuildingMenu extends TowncraftView {
                 int startSection = user.getSection();
                 slotClickContext.openForPlayer(PlaceMenu.class, ImmutableMap.of("TILE_SIZE", building.getSize(), "START_SECTION", startSection, "TITLE", Msg.format("Place building"),
                         "ON_PLACE", (PlaceMenu.PlaceAction) (ctx, section, anchor) -> {
-                            User u = ctx.getUser();
+                            User u = getUser(ctx);
                             for (Integer s : building.getSize().toList(anchor)) {
                                 ConstructionTile tile = new ConstructionTile(
                                         building.getName(),
@@ -142,19 +142,19 @@ public class BuildMenuSelectBuildingMenu extends TowncraftView {
         context.layoutSlot('b').onRender(slotRenderContext -> {
             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.BARRIER);
             itemStack.setName(Msg.format("<red>Click to go back!"));
-            slotRenderContext.setItem(itemStack);
+            slotRenderContext.setItem(itemStack.build());
         }).onClick(SlotClickContext::closeForPlayer);
 
         context.layoutSlot('>').onRender(slotRenderContext -> {
             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.ARROW);
             itemStack.setName(Msg.format("<white>Next Page"));
-            slotRenderContext.setItem(itemStack);
+            slotRenderContext.setItem(itemStack.build());
         }).updateOnStateChange(paginationState).displayIf(() -> pagination.currentPageIndex() < pagination.lastPageIndex()).onClick(pagination::advance);
 
         context.layoutSlot('<').onRender(slotRenderContext -> {
             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.ARROW);
             itemStack.setName(Msg.format("<white>Previous Page"));
-            slotRenderContext.setItem(itemStack);
+            slotRenderContext.setItem(itemStack.build());
         }).displayIf(() -> pagination.currentPageIndex() != 0).onClick(pagination::back);
     }
 }

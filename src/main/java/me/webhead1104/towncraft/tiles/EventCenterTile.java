@@ -25,9 +25,9 @@ package me.webhead1104.towncraft.tiles;
 
 import com.google.errorprone.annotations.Keep;
 import me.webhead1104.towncraft.data.objects.WorldSection;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.minestom.server.item.Material;
 
 @Keep

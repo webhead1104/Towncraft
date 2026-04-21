@@ -36,13 +36,13 @@ import me.webhead1104.towncraft.features.world.WorldMenu;
 import me.webhead1104.towncraft.features.world.WorldUtils;
 import me.webhead1104.towncraft.features.world.build.BuildingType;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.tiles.BuildingTile;
 import me.webhead1104.towncraft.tiles.StaticWorldTile;
 import me.webhead1104.towncraft.tiles.Tile;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.kyori.adventure.key.Key;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
@@ -62,22 +62,24 @@ public class WorldEditMenu extends TowncraftView {
 
     @Override
     public void onOpen(@NotNull OpenContext context) {
-        context.getUser().setSection(sectionState.get(context));
+        getUser(context).setSection(sectionState.get(context));
         super.onOpen(context);
     }
 
     @Override
     public void onFirstRender(@NotNull RenderContext context) {
-        TowncraftPlayer player = context.getPlayer();
+        TowncraftPlayer player = (TowncraftPlayer) context.getPlayer();
         User user = userState.get(context);
         World world = user.getWorld();
         WorldSection section = world.getSection(sectionState.get(context));
 
-        section.getSlotMap().forEach((key, tile) -> context.slot(key).updateOnClick().onRender(slotRenderContext -> slotRenderContext.setItem(tile.render(slotRenderContext, section, key))).onClick(clickContext -> {
-            if (handleTileClick(clickContext, tile)) {
-                openBackMenu.set(false, clickContext);
-            }
-        }));
+        section.getSlotMap().forEach((key, tile) -> context.slot(key)
+                .updateOnClick().onRender(slotRenderContext -> slotRenderContext.setItem(tile.render(slotRenderContext, section, key).build()))
+                .onClick(clickContext -> {
+                    if (handleTileClick(clickContext, tile)) {
+                        openBackMenu.set(false, clickContext);
+                    }
+                }));
 
         WorldUtils.applyArrows(player, sectionState.get(context));
 
@@ -88,20 +90,20 @@ public class WorldEditMenu extends TowncraftView {
 
     @Override
     public void onClick(@NotNull SlotClickContext context) {
-        if (context.isOnEntityContainer()) {
-            if (context.getClickedSlot() == 68 && context.itemExists()) {
+        if (context.isOnEntityContainer() && itemExists(context)) {
+            if (context.getClickedSlot() == 68) {
                 context.openForPlayer(WorldEditMenu.class, sectionState.get(context) + 1);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 76 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 76) {
                 context.openForPlayer(WorldEditMenu.class, sectionState.get(context) + 8);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 66 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 66) {
                 context.openForPlayer(WorldEditMenu.class, sectionState.get(context) - 1);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 58 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 58) {
                 context.openForPlayer(WorldEditMenu.class, sectionState.get(context) - 8);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 89 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 89) {
                 context.openForPlayer(WorldMenu.class, sectionState.get(context));
                 openBackMenu.set(false, context);
             }
@@ -136,7 +138,7 @@ public class WorldEditMenu extends TowncraftView {
                 "START_ANCHOR", anchor,
                 "TITLE", Msg.format("Edit"),
                 "ON_PLACE", (PlaceMenu.PlaceAction) (ctx, newSection, newAnchor) -> {
-                    User u = ctx.getUser();
+                    User u = getUser(ctx);
                     for (Integer s : building.getSize().toList(newAnchor)) {
                         u.getWorld().getSection(newSection).setSlot(s, building.getTile());
                     }
@@ -148,7 +150,7 @@ public class WorldEditMenu extends TowncraftView {
                     ctx.openForPlayer(WorldMenu.class, newSection);
                 },
                 "ON_CANCEL", (PlaceMenu.CancelAction) cancelCtx -> {
-                    User u = cancelCtx.getUser();
+                    User u = getUser(cancelCtx);
                     for (Integer s : building.getSize().toList(anchor)) {
                         u.getWorld().getSection(startSection).setSlot(s, building.getTile());
                     }

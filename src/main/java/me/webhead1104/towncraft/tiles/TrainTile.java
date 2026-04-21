@@ -25,11 +25,13 @@ package me.webhead1104.towncraft.tiles;
 
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.trains.TrainMenu;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.minestom.server.item.Material;
+
+import static me.webhead1104.towncraft.menus.TowncraftView.getUser;
 
 public class TrainTile extends Tile {
 
@@ -44,7 +46,7 @@ public class TrainTile extends Tile {
 
     @Override
     public boolean onClick(SlotClickContext context, WorldSection worldSection, int slot) {
-        if (context.getUser().getTrains().isUnlocked()) {
+        if (getUser(context).getTrains().isUnlocked()) {
             context.openForPlayer(TrainMenu.class);
             return true;
         }

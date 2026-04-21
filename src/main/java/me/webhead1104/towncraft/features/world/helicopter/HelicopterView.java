@@ -80,7 +80,7 @@ public class HelicopterView extends TowncraftView {
             }
 
             itemStack.setLore(lore);
-            indicatorContext.setItem(itemStack);
+            indicatorContext.setItem(itemStack.build());
         });
 
         for (int i = 0; i < 27; i++) {
@@ -123,7 +123,7 @@ public class HelicopterView extends TowncraftView {
                 }
 
                 itemStack.setLore(lore);
-                slotRenderContext.setItem(itemStack);
+                slotRenderContext.setItem(itemStack.build());
             }).onClick(slotClickContext -> {
                 Helicopter helicopter = helicopterState.get(slotClickContext);
                 if (!helicopter.hasOrder(slot)) {

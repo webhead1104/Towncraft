@@ -90,7 +90,7 @@ public class TowncraftPlatformManager {
         Config.loadConfig();
         loadDataLoaders();
         loadDataVersions();
-        viewFrame = new ViewFrame();
+        viewFrame = ViewFrame.create();
         registerViews();
         userManager = new UserManager();
     }

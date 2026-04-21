@@ -34,12 +34,12 @@ import me.webhead1104.towncraft.data.objects.BarnUpgrade;
 import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.dataLoaders.ItemType;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.Context;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.Msg;
 import me.webhead1104.towncraft.utils.Utils;
+import net.cytonic.minestomInventoryFramework.context.Context;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.item.Material;
@@ -75,7 +75,7 @@ public class BarnMenu extends TowncraftView {
                         TowncraftItemStack itemStack = Towncraft.getDataLoader(ItemType.class).get(item).getItemStack();
                         itemStack.setName(Msg.format("%s: <yellow>%d", Towncraft.getDataLoader(ItemType.class).get(item).getName(), barnState.get(slotRenderContext).getItem(item)));
                         itemStack.overrideNameColor();
-                        slotRenderContext.setItem(itemStack);
+                        slotRenderContext.setItem(itemStack.build());
                     }).onClick(slotClickContext -> {
                         sellItem.set(item, slotClickContext);
                         sellAmount.set(1, slotClickContext);
@@ -88,7 +88,7 @@ public class BarnMenu extends TowncraftView {
                     TowncraftItemStack itemStack = TowncraftItemStack.of(Material.RED_CANDLE);
                     itemStack.setName(Msg.format("<red>Click to decrease the amount!"));
                     itemStack.setLore(Msg.format("<blue>Currently at %d", sellAmount.get(slotRenderContext)));
-                    slotRenderContext.setItem(itemStack);
+                    slotRenderContext.setItem(itemStack.build());
                 }).onClick(slotClickContext -> {
                     sellAmount.decrement(slotClickContext);
                     slotClickContext.update();
@@ -100,7 +100,7 @@ public class BarnMenu extends TowncraftView {
                     int amount = sellAmount.get(slotRenderContext);
                     TowncraftItemStack itemStack = TowncraftItemStack.of(Material.LIME_CONCRETE);
                     itemStack.setName(Msg.format("<green>Click to sell <aqua>%d <green>of <yellow>%s <green>for <aqua>%d <gold>coins!", amount, item.getName(), item.getSellPrice() * amount));
-                    slotRenderContext.setItem(itemStack);
+                    slotRenderContext.setItem(itemStack.build());
                 }).onClick(slotClickContext -> {
                     ItemType.Item item = Towncraft.getDataLoader(ItemType.class).get(sellItem.get(slotClickContext));
                     int amount = sellAmount.get(slotClickContext);
@@ -119,7 +119,7 @@ public class BarnMenu extends TowncraftView {
                     TowncraftItemStack itemStack = TowncraftItemStack.of(Material.GREEN_CANDLE);
                     itemStack.setName(Msg.format("<green>Click to increase the amount!"));
                     itemStack.setLore(Msg.format("<blue>Currently at %d", sellAmount.get(slotRenderContext)));
-                    slotRenderContext.setItem(itemStack);
+                    slotRenderContext.setItem(itemStack.build());
                 }).onClick(slotClickContext -> {
                     sellAmount.increment(slotClickContext);
                     slotClickContext.update();
@@ -161,7 +161,7 @@ public class BarnMenu extends TowncraftView {
 
     private void setInventoryItems(Context context) {
         Barn barn = barnState.get(context);
-        TowncraftPlayer player = context.getPlayer();
+        TowncraftPlayer player = (TowncraftPlayer) context.getPlayer();
         TowncraftItemStack storage;
         if (barn.getBarnUpgrade().getBarnStorage() > barn.getStorage()) {
             storage = TowncraftItemStack.of(Material.LIME_CONCRETE);

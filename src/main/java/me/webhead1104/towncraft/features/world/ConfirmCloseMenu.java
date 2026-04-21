@@ -26,9 +26,9 @@ package me.webhead1104.towncraft.features.world;
 import me.devnatan.inventoryframework.ViewConfigBuilder;
 import me.devnatan.inventoryframework.context.RenderContext;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +50,7 @@ public class ConfirmCloseMenu extends TowncraftView {
                     Msg.format("<red>If so click this item!"),
                     Msg.format("<green>Or if don't want to close towncraft hit the Esc key or click the back button!")
             );
-            slotRenderContext.setItem(itemStack);
+            slotRenderContext.setItem(itemStack.build());
         }).onClick(slotClickContext -> {
             userState.get(slotClickContext).save();
             context.closeForEveryone();
@@ -60,7 +60,7 @@ public class ConfirmCloseMenu extends TowncraftView {
         context.slot(8).onRender(slotRenderContext -> {
             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.BARRIER);
             itemStack.setName(Msg.format("<red>Click to go back!"));
-            slotRenderContext.setItem(itemStack);
+            slotRenderContext.setItem(itemStack.build());
         }).onClick(SlotClickContext::closeForPlayer);
     }
 }

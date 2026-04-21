@@ -37,13 +37,13 @@ import me.webhead1104.towncraft.features.world.build.BuildMenu;
 import me.webhead1104.towncraft.features.world.build.BuildingType;
 import me.webhead1104.towncraft.features.world.edit.WorldEditMenu;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.tiles.BuildingTile;
 import me.webhead1104.towncraft.tiles.StaticWorldTile;
 import me.webhead1104.towncraft.tiles.Tile;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
@@ -68,14 +68,14 @@ public class WorldMenu extends TowncraftView {
 
     @Override
     public void onOpen(@NotNull OpenContext context) {
-        context.getUser().setSection(sectionState.get(context));
+        getUser(context).setSection(sectionState.get(context));
         super.onOpen(context);
     }
 
     @Override
     public void onFirstRender(@NotNull RenderContext context) {
-        TowncraftPlayer player = context.getPlayer();
-        User user = context.getUser();
+        TowncraftPlayer player = (TowncraftPlayer) context.getPlayer();
+        User user = getUser(context);
         WorldSection worldSection = user.getWorld().getSection(sectionState.get(context));
         worldSection.getSlotMap().forEach((slot, mapTile) -> {
             mapTile.onLoad(context, worldSection, slot);
@@ -86,7 +86,7 @@ public class WorldMenu extends TowncraftView {
             }).onRender(slotRenderContext -> {
                 WorldSection section = worldSectionState.get(slotRenderContext);
                 Tile tile = section.getSlot(slot);
-                slotRenderContext.setItem(tile.render(slotRenderContext, section, slot));
+                slotRenderContext.setItem(tile.render(slotRenderContext, section, slot).build());
             }).onClick(clickContext -> {
                 WorldSection section = worldSectionState.get(clickContext);
                 Tile tile = section.getSlot(slot);
@@ -109,7 +109,7 @@ public class WorldMenu extends TowncraftView {
                                     "START_ANCHOR", anchor,
                                     "TITLE", Msg.format("Edit"),
                                     "ON_PLACE", (PlaceMenu.PlaceAction) (ctx, newSection, newAnchor) -> {
-                                        User uu = ctx.getUser();
+                                        User uu = getUser(context);
                                         for (Integer s2 : building.getSize().toList(newAnchor)) {
                                             uu.getWorld().getSection(newSection).setSlot(s2, building.getTile());
                                         }
@@ -121,7 +121,7 @@ public class WorldMenu extends TowncraftView {
                                         ctx.openForPlayer(WorldMenu.class, newSection);
                                     },
                                     "ON_CANCEL", (PlaceMenu.CancelAction) cancelCtx -> {
-                                        User uu = cancelCtx.getUser();
+                                        User uu = getUser(cancelCtx);
                                         for (Integer s2 : building.getSize().toList(anchorFinal)) {
                                             uu.getWorld().getSection(startSection).setSlot(s2, building.getTile());
                                         }
@@ -180,23 +180,23 @@ public class WorldMenu extends TowncraftView {
 
     @Override
     public void onClick(@NotNull SlotClickContext context) {
-        if (context.isOnEntityContainer()) {
-            if (context.getClickedSlot() == 68 && context.itemExists()) {
+        if (context.isOnEntityContainer() && itemExists(context)) {
+            if (context.getClickedSlot() == 68) {
                 context.openForPlayer(WorldMenu.class, sectionState.get(context) + 1);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 76 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 76) {
                 context.openForPlayer(WorldMenu.class, sectionState.get(context) + 8);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 66 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 66) {
                 context.openForPlayer(WorldMenu.class, sectionState.get(context) - 1);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 58 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 58) {
                 context.openForPlayer(WorldMenu.class, sectionState.get(context) - 8);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 89 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 89) {
                 context.openForPlayer(BuildMenu.class);
                 openBackMenu.set(false, context);
-            } else if (context.getClickedSlot() == 88 && context.itemExists()) {
+            } else if (context.getClickedSlot() == 88) {
                 context.openForPlayer(WorldEditMenu.class, sectionState.get(context));
                 openBackMenu.set(false, context);
             }

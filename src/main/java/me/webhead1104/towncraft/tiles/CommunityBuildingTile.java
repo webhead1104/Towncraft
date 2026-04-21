@@ -28,9 +28,9 @@ import lombok.Getter;
 import lombok.Setter;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.world.build.CommunityBuildingType;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.minestom.server.item.Material;
 
 @Getter

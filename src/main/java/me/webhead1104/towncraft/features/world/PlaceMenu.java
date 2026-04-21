@@ -31,13 +31,13 @@ import me.webhead1104.towncraft.data.TileSize;
 import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.CloseContext;
-import me.webhead1104.towncraft.menus.context.Context;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.tiles.StaticWorldTile;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.CloseContext;
+import net.cytonic.minestomInventoryFramework.context.Context;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
@@ -67,7 +67,7 @@ public class PlaceMenu extends TowncraftView {
         context.modifyConfig().title(titleState.get(context));
 
         Integer start = startSectionState.get(context);
-        sectionState.set(Objects.requireNonNullElseGet(start, () -> context.getUser().getSection()), context);
+        sectionState.set(Objects.requireNonNullElseGet(start, () -> getUser(context).getSection()), context);
         Integer startAnchor = startAnchorState.get(context);
         if (startAnchor != null) {
             TileSize size = tileSizeState.get(context);
@@ -80,8 +80,8 @@ public class PlaceMenu extends TowncraftView {
 
     @Override
     public void onUpdate(@NotNull Context context) {
-        WorldUtils.applyArrows(context.getPlayer(), sectionState.get(context));
-        placeConfirm(canPlaceState.get(context), context.getPlayer());
+        WorldUtils.applyArrows((TowncraftPlayer) context.getPlayer(), sectionState.get(context));
+        placeConfirm(canPlaceState.get(context), (TowncraftPlayer) context.getPlayer());
     }
 
     private void placeConfirm(boolean canPlace, TowncraftPlayer player) {
@@ -128,7 +128,7 @@ public class PlaceMenu extends TowncraftView {
             }
         });
 
-        User user = context.getUser();
+        User user = getUser(context);
         for (int i = 0; i < 54; i++) {
             final int idx = i;
             context.slot(i).updateOnClick().watch(sectionState).onRender(slotRenderContext -> {
@@ -138,16 +138,16 @@ public class PlaceMenu extends TowncraftView {
                     if (ws.getSlot(idx) instanceof StaticWorldTile) {
                         TowncraftItemStack ok = TowncraftItemStack.of(Material.LIME_CONCRETE);
                         ok.setName(Msg.format("<green>You can place it here!"));
-                        slotRenderContext.setItem(ok);
+                        slotRenderContext.setItem(ok.build());
                     } else {
                         canPlaceState.set(false, context);
                         TowncraftItemStack bad = TowncraftItemStack.of(Material.RED_CONCRETE);
                         bad.setName(Msg.format("<red>You can't place it here!"));
-                        slotRenderContext.setItem(bad);
+                        slotRenderContext.setItem(bad.build());
                     }
                     return;
                 }
-                slotRenderContext.setItem(ws.getSlot(idx).render(slotRenderContext, user.getWorld().getSection(sectionState.get(context)), idx));
+                slotRenderContext.setItem(ws.getSlot(idx).render(slotRenderContext, user.getWorld().getSection(sectionState.get(context)), idx).build());
             }).onClick(click -> {
                 TileSize size = tileSizeState.get(click);
                 int newSlot = WorldUtils.adjustPlacement(click.getClickedSlot(), size);
@@ -161,25 +161,25 @@ public class PlaceMenu extends TowncraftView {
 
     @Override
     public void onClick(@NotNull SlotClickContext context) {
-        if (!context.isOnEntityContainer()) return;
+        if (!context.isOnEntityContainer() || !itemExists(context)) return;
         int section = sectionState.get(context);
-        if (context.getClickedSlot() == 68 && context.itemExists()) {
+        if (context.getClickedSlot() == 68) {
             sectionState.set(section + 1, context);
             canPlaceState.set(true, context);
             context.update();
-        } else if (context.getClickedSlot() == 76 && context.itemExists()) {
+        } else if (context.getClickedSlot() == 76) {
             sectionState.set(section + 8, context);
             canPlaceState.set(true, context);
             context.update();
-        } else if (context.getClickedSlot() == 66 && context.itemExists()) {
+        } else if (context.getClickedSlot() == 66) {
             sectionState.set(section - 1, context);
             canPlaceState.set(true, context);
             context.update();
-        } else if (context.getClickedSlot() == 58 && context.itemExists()) {
+        } else if (context.getClickedSlot() == 58) {
             sectionState.set(section - 8, context);
             canPlaceState.set(true, context);
             context.update();
-        } else if (context.getClickedSlot() == 67 && context.itemExists() && Boolean.TRUE.equals(canPlaceState.get(context))) {
+        } else if (context.getClickedSlot() == 67 && Boolean.TRUE.equals(canPlaceState.get(context))) {
             PlaceAction place = onPlaceState.get(context);
             if (place != null) {
                 openBackMenu.set(false, context);

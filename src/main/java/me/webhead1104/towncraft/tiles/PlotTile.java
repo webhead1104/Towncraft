@@ -31,18 +31,20 @@ import me.webhead1104.towncraft.Towncraft;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.features.world.plots.PlotMenu;
 import me.webhead1104.towncraft.features.world.plots.PlotType;
-import me.webhead1104.towncraft.menus.context.Context;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
-import me.webhead1104.towncraft.menus.context.SlotRenderContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.utils.Msg;
 import me.webhead1104.towncraft.utils.Utils;
+import net.cytonic.minestomInventoryFramework.context.Context;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
+import net.cytonic.minestomInventoryFramework.context.SlotRenderContext;
 import net.kyori.adventure.key.Key;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+
+import static me.webhead1104.towncraft.menus.TowncraftView.getUser;
 
 @Getter
 @Setter
@@ -86,7 +88,7 @@ public class PlotTile extends BuildingTile implements TimeFinishable {
             return true;
         } else if (claimable) {
             this.claimable = false;
-            context.getUser().getBarn().addAmountToItem(Towncraft.getDataLoader(PlotType.class).get(plotType).getItem().key(), 1);
+            getUser(context).getBarn().addAmountToItem(Towncraft.getDataLoader(PlotType.class).get(plotType).getItem().key(), 1);
             this.plotType = Towncraft.NONE_KEY;
         }
         return false;

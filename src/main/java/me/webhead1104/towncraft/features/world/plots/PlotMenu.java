@@ -32,12 +32,12 @@ import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.data.objects.World;
 import me.webhead1104.towncraft.data.objects.WorldSection;
 import me.webhead1104.towncraft.menus.TowncraftView;
-import me.webhead1104.towncraft.menus.context.SlotClickContext;
 import me.webhead1104.towncraft.platform.TowncraftItemStack;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.tiles.PlotTile;
 import me.webhead1104.towncraft.tiles.Tile;
 import me.webhead1104.towncraft.utils.Msg;
+import net.cytonic.minestomInventoryFramework.context.SlotClickContext;
 import net.kyori.adventure.key.Key;
 import net.minestom.server.item.Material;
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +64,7 @@ public class PlotMenu extends TowncraftView {
 
     @Override
     public void onFirstRender(@NotNull RenderContext context) {
-        TowncraftPlayer player = context.getPlayer();
+        TowncraftPlayer player = (TowncraftPlayer) context.getPlayer();
         User user = userState.get(context);
         World world = user.getWorld();
 
@@ -77,14 +77,14 @@ public class PlotMenu extends TowncraftView {
                 }).onRender(slotRenderContext -> {
                     WorldSection section = worldSectionState.get(slotRenderContext);
                     Tile tile = section.getSlot(slot);
-                    slotRenderContext.setItem(tile.render(slotRenderContext, section, slot));
+                    slotRenderContext.setItem(tile.render(slotRenderContext, section, slot).build());
                 });
             }
         });
         context.slot(slotState.get(context)).onRender(slotRenderContext -> {
             TowncraftItemStack itemStack = TowncraftItemStack.of(Material.GREEN_CONCRETE);
             itemStack.setName(Msg.format("<green>Click me with a ingredient to plant it!"));
-            slotRenderContext.setItem(itemStack);
+            slotRenderContext.setItem(itemStack.build());
         }).onClick(slotClickContext -> {
             PlotType.Plot selectedPlotType = selectedPlotTypeState.get(slotClickContext);
             if (slotClickContext.getPlayer().getInventory().getCursorItem().isAir() && selectedPlotType.equals(Towncraft.NONE_KEY)) {
@@ -127,7 +127,7 @@ public class PlotMenu extends TowncraftView {
             PlotType.Plot plotType = plotTypes.get(context.getSlot());
             if (plotType.getPrice().has(userState.get(context))) {
                 TowncraftItemStack itemStack = plotType.getMenuItem();
-                context.getPlayer().setItemOnCursor(itemStack);
+                ((TowncraftPlayer) context.getPlayer()).setItemOnCursor(itemStack);
                 selectedPlotTypeKeyState.set(plotType.getKey(), context);
                 context.update();
             }
