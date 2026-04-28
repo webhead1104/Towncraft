@@ -52,7 +52,7 @@ public class TowncraftView extends View {
     }
 
     public static User getUser(Context context) {
-        return TowncraftPlatformManager.getUserManager().getUser(context.getId());
+        return TowncraftPlatformManager.getUserManager().getUser(context.getPlayer().getUuid());
     }
 
     public static boolean itemExists(SlotClickContext context) {
