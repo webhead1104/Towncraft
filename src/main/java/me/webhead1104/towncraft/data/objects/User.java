@@ -37,7 +37,6 @@ import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Objects;
 import java.util.UUID;
@@ -196,10 +195,6 @@ public class User {
     }
 
     public void save() {
-        try {
-            Towncraft.getUserLoader().saveUser(uuid, toString());
-        } catch (IOException e) {
-            Towncraft.getLogger().error("An error occurred whilst saving a user!", e);
-        }
+        TowncraftPlatformManager.getDatabaseManager().saveUser(uuid, toString());
     }
 }

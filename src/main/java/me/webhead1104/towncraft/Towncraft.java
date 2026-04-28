@@ -25,7 +25,6 @@ package me.webhead1104.towncraft;
 
 import me.devnatan.inventoryframework.ViewFrame;
 import me.webhead1104.towncraft.dataLoaders.DataLoader;
-import me.webhead1104.towncraft.database.UserLoader;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.serializers.TowncraftSerializer;
 import me.webhead1104.towncraft.utils.ClassGraphUtils;
@@ -37,7 +36,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.configurate.gson.GsonConfigurationLoader;
 
-import java.io.File;
 import java.util.UUID;
 
 public interface Towncraft {
@@ -70,17 +68,5 @@ public interface Towncraft {
 
     static Logger getLogger() {
         return LOGGER;
-    }
-
-    static Config getConfig() {
-        return TowncraftPlatformManager.getConfig();
-    }
-
-    static File getDataFolder() {
-        return new File("/towncraft");
-    }
-
-    static UserLoader getUserLoader() {
-        return TowncraftPlatformManager.getLoaderManager().getUserLoader();
     }
 }

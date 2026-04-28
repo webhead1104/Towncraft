@@ -1,3 +1,4 @@
+import io.ebean.annotation.Platform
 import net.kyori.indra.git.RepositoryValueSource
 import org.eclipse.jgit.api.Git
 
@@ -8,6 +9,8 @@ plugins {
     alias(libs.plugins.blossom)
     id("net.cytonic.run-cytosis") version "1.0"
     alias(libs.plugins.shadow)
+    alias(libs.plugins.ebean)
+    id("net.cytonic.migration-generator") version "1.0-SNAPSHOT"
 }
 
 version = "0.0.1"
@@ -27,6 +30,12 @@ dependencies {
     implementation(libs.lamp.minestom)
     implementation(libs.commonsText)
     implementation(libs.classgraph)
+}
+
+migration {
+    id = "towncraft"
+    platform = Platform.POSTGRES
+    entityPackages = listOf("me.webhead1104.towncraft")
 }
 
 tasks.withType<JavaCompile> {

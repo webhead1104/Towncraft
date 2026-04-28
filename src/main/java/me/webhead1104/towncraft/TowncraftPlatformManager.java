@@ -23,9 +23,7 @@
  */
 package me.webhead1104.towncraft;
 
-import com.google.common.base.Stopwatch;
 import lombok.Getter;
-import lombok.Setter;
 import me.devnatan.inventoryframework.View;
 import me.devnatan.inventoryframework.ViewFrame;
 import me.webhead1104.towncraft.annotations.DependsOn;
@@ -38,14 +36,12 @@ import me.webhead1104.towncraft.data.objects.User;
 import me.webhead1104.towncraft.dataLoaders.DataLoader;
 import me.webhead1104.towncraft.dataLoaders.ItemType;
 import me.webhead1104.towncraft.dataVersions.DataVersion;
-import me.webhead1104.towncraft.database.LoaderManager;
-import me.webhead1104.towncraft.database.UserLoader;
+import me.webhead1104.towncraft.database.DatabaseManager;
 import me.webhead1104.towncraft.features.animals.AnimalType;
 import me.webhead1104.towncraft.features.factories.FactoryType;
 import me.webhead1104.towncraft.platform.TowncraftPlayer;
 import me.webhead1104.towncraft.utils.BuildInfo;
 import me.webhead1104.towncraft.utils.ClassGraphUtils;
-import net.minestom.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.transformation.ConfigurationTransformation;
 import revxrsal.commands.Lamp;
@@ -53,7 +49,6 @@ import revxrsal.commands.command.CommandActor;
 import revxrsal.commands.orphan.Orphans;
 import revxrsal.commands.parameter.ParameterTypes;
 
-import java.io.IOException;
 import java.util.*;
 
 public class TowncraftPlatformManager {
@@ -66,11 +61,7 @@ public class TowncraftPlatformManager {
     @Getter
     private static UserManager userManager;
     @Getter
-    @Setter
-    private static LoaderManager loaderManager;
-    @Getter
-    @Setter
-    private static Config config;
+    private static DatabaseManager databaseManager;
 
     public static <T extends DataLoader> T getDataLoader(Class<T> dataLoaderClass) {
         T loader = dataLoaderClass.cast(dataLoaders.get(dataLoaderClass));
@@ -87,14 +78,13 @@ public class TowncraftPlatformManager {
         logger.info("Loading Towncraft version {}", BuildInfo.VERSION);
         logger.info("");
         logger.info("******************************************");
-        Config.loadConfig();
         loadDataLoaders();
         loadDataVersions();
         viewFrame = ViewFrame.create();
         registerViews();
         userManager = new UserManager();
+        databaseManager = new DatabaseManager();
     }
-
 
     public static <A extends CommandActor> void registerParameterTypes(ParameterTypes.Builder<A> builder) {
         builder.addParameterType(AnimalType.Animal.class, new AnimalTypeArgument<>());
@@ -107,34 +97,6 @@ public class TowncraftPlatformManager {
         for (TowncraftSubCommand implementedClass : ClassGraphUtils.getImplementedClasses(TowncraftSubCommand.class, "me.webhead1104.towncraft.commands.subCommands")) {
             lamp.register(Orphans.path("towncraft").handler(implementedClass));
         }
-    }
-
-    public static void onJoin(TowncraftPlayer player) {
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        UserLoader userLoader = Towncraft.getUserLoader();
-        MinecraftServer.getSchedulerManager().buildTask(() -> {
-            try {
-                if (userLoader.userExists(player.getUuid())) {
-                    User user = User.fromJson(userLoader.readUser(player.getUuid()), player);
-                    TowncraftPlatformManager.getUserManager().setUser(player.getUuid(), user);
-                    Towncraft.getLogger().info("Data has been loaded for {}", player.getName());
-                    return;
-                }
-                Towncraft.getLogger().info("Created new user for {}", player.getName());
-                User user = new User(player.getUuid());
-                userLoader.saveUser(player.getUuid(), user.toString());
-                TowncraftPlatformManager.getUserManager().setUser(player.getUuid(), user);
-            } catch (IOException e) {
-                Towncraft.getLogger().error("An error occurred whilst loading player data!", e);
-            }
-            Towncraft.getLogger().info("Join event done in {}ms", stopwatch.elapsed().toMillis());
-        });
-    }
-
-    public static void onLeave(TowncraftPlayer player) {
-        player.getUser().save();
-        userManager.removeUser(player.getUuid());
-        Towncraft.getLogger().info("Data has been saved for {}", player.getName());
     }
 
     public static void shutdown() {

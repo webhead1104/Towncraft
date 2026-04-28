@@ -24,6 +24,7 @@ lombok = "9.4.0"
 indra = "4.0.0"
 blossom = "2.2.0"
 shadow = "9.4.1"
+ebean = "17.5.0"
 
 [libraries]
 inventoryFramework-api = { module = "me.devnatan:inventory-framework-api", version.ref = "inventoryFramework" }
@@ -61,3 +62,4 @@ indra-git = { id = "net.kyori.indra.git", version.ref = "indra" }
 indra-licenser = { id = "net.kyori.indra.licenser.spotless", version.ref = "indra" }
 blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+ebean = { id = "io.ebean", version.ref = "ebean" }
